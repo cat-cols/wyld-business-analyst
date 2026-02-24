@@ -9,6 +9,8 @@ environment/*
 !environment/.gitkeep
 !environment/README.md
 
+# large files
+*.zip
 **/outputs/large/
 *.db
 *.sqlite
@@ -20,8 +22,13 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 
+# excel files to ignore
+**/data/external/*.xlsx
+*.xlsx
+
 # personal notes
 notes/**
+docs/licenses_by_type.pdf
 
 # existing projects
 existing-projects.md
