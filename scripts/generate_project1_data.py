@@ -8,7 +8,7 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 import numpy as np
 import pandas as pd
-
+import openpyxl
 
 @dataclass
 class Config:
@@ -16,11 +16,11 @@ class Config:
     end_date: str = "2025-12-31"
     seed: int = 42
     n_products: int = 15
-    # n_locations: int =
+    n_locations: int = 2345
 
 # Ensure all directories exist
 def ensure_dirs(base: Path):
-    p1 = base / "project_01_wyld_ops_command_center"
+    p1 = base / "01_ops_command_center"
     paths = {
         "modeled": p1 / "data" / "modeled",
         "sales_src": p1 / "data" / "source_extracts" / "sales",
@@ -59,7 +59,7 @@ def write_csv(df, path):
     df.to_csv(path, index=False)
 
 # Write DataFrame to XLSX file
-def write_xlsx(df, path, sheet_name="Sheet1"):
+def write_xlsx(df, path, sheet_name="sales_data"):
     path.parent.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(path, engine="openpyxl") as writer:
         df.to_excel(writer, index=False, sheet_name=sheet_name)
@@ -92,7 +92,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.00,
+        "base_list_price": 10.00,
         "base_cogs_ratio": 0.45,
         "demand_weight": 1.02,
     },
@@ -106,7 +106,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 25.00,
+        "base_list_price": 10.00,
         "base_cogs_ratio": 0.47,
         "demand_weight": 1.08,
     },
@@ -120,7 +120,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.46,
         "demand_weight": 1.12,
     },
@@ -134,7 +134,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 25.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.48,
         "demand_weight": 0.95,
     },
@@ -148,7 +148,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.00,
+        "base_list_price": 10.00,
         "base_cogs_ratio": 0.42,
         "demand_weight": 1.18,
     },
@@ -162,7 +162,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 25.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.49,
         "demand_weight": 0.93,
     },
@@ -176,7 +176,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.00,
+        "base_list_price": 10.00,
         "base_cogs_ratio": 0.42,
         "demand_weight": 1.15,
     },
@@ -190,7 +190,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.00,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.46,
         "demand_weight": 1.04,
     },
@@ -204,7 +204,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.47,
         "demand_weight": 0.97,
     },
@@ -218,7 +218,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.00,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.46,
         "demand_weight": 1.06,
     },
@@ -232,7 +232,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.00,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.42,
         "demand_weight": 1.10,
     },
@@ -246,7 +246,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.00,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.42,
         "demand_weight": 1.09,
     },
@@ -260,7 +260,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.00,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.42,
         "demand_weight": 1.11,
     },
@@ -274,7 +274,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 22.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.43,
         "demand_weight": 1.14,
     },
@@ -288,7 +288,7 @@ WYLD_PRODUCTS = [
         "category_name": "Gummies",
         "pack_size": 10,
         "potency_mg_total": 100,
-        "base_list_price": 24.50,
+        "base_list_price": 10.50,
         "base_cogs_ratio": 0.47,
         "demand_weight": 0.98,
     },
@@ -323,56 +323,6 @@ def generate_dim_product(cfg, rng):
         })
 
     return pd.DataFrame(rows)
-
-# Version 2: Generate 'products' dim table
-    # def generate_dim_product(cfg, rng):
-    #     categories = ["Gummies", "Beverages", "Tinctures", "Mints"]
-    #     rows = []
-    #     for product_key in range(1, cfg.n_products + 1):
-    #         cat = rng.choice(categories, p=[0.55, 0.20, 0.15, 0.10])
-    #         if cat == "Gummies":
-    #             flavor = rng.choice(["Huckleberry","Marionberry","Peach","Pomegranate","Raspberry","Sour Apple"])
-    #             pack = int(rng.choice([10,20,40], p=[0.65,0.25,0.10]))
-    #             base_price = {10:18,20:30,40:54}[pack] + rng.normal(0,2)
-    #             cogs_ratio = rng.uniform(0.38,0.52)
-    #             potency = int(rng.choice([5,10,20]))
-    #             size_label = f"{pack}ct"
-    #         elif cat == "Beverages":
-    #             flavor = rng.choice(["Lemon","Mango","Blackberry","Blood Orange"])
-    #             pack = int(rng.choice([1,4,12], p=[0.55,0.30,0.15]))
-    #             base_price = {1:7,4:24,12:62}[pack] + rng.normal(0,2.5)
-    #             cogs_ratio = rng.uniform(0.45,0.62)
-    #             potency = int(rng.choice([2,5,10]))
-    #             size_label = f"{pack}pk"
-    #         elif cat == "Tinctures":
-    #             flavor = rng.choice(["Mint","Citrus","Unflavored"])
-    #             pack = 1
-    #             base_price = float(rng.choice([28,38,48]) + rng.normal(0,3))
-    #             cogs_ratio = rng.uniform(0.35,0.50)
-    #             potency = int(rng.choice([30,60,90]))
-    #             size_label = "30ml"
-    #         else:
-    #             flavor = rng.choice(["Peppermint","Cinnamon","Berry"])
-    #             pack = int(rng.choice([10,20]))
-    #             base_price = float(rng.choice([14,22]) + rng.normal(0,2))
-    #             cogs_ratio = rng.uniform(0.34,0.48)
-    #             potency = int(rng.choice([2,5]))
-    #             size_label = f"{pack}ct"
-
-    #         rows.append({
-    #             "product_key": product_key,
-    #             "source_product_code": f"SKU{product_key:04d}",
-    #             "product_name": f"Wyld {flavor} {cat} {size_label}",
-    #             "brand_name": "Wyld",
-    #             "category_name": cat,
-    #             "flavor_name": flavor,
-    #             "pack_size": pack,
-    #             "potency_mg": potency,
-    #             "base_list_price": round(max(4, float(base_price)),2),
-    #             "base_cogs_ratio": round(float(cogs_ratio),4),
-    #             "is_active": 1,
-    #         })
-    #     return pd.DataFrame(rows)
 
 # Generate dimension table for locations
 def generate_dim_location(cfg, rng):
@@ -427,6 +377,7 @@ def generate_fact_sales(dim_date, dim_product, dim_location, dim_channel, cfg, r
     promo_dates = pd.date_range(cfg.start_date, cfg.end_date, freq="35D")
     cat_weight = {"Gummies":1.25,"Beverages":0.85,"Tinctures":0.40,"Mints":0.55}
     channel_base = {"Retail":1.00,"Wholesale":0.75,"Distributor":0.55}
+    channel_price_factor = {"Retail": 1.00, "Wholesale": 0.88, "Distributor": 0.82}
     channels = dict(zip(dim_channel["channel_name"], dim_channel["channel_key"]))
     rows = []
 
@@ -450,29 +401,47 @@ def generate_fact_sales(dim_date, dim_product, dim_location, dim_channel, cfg, r
                     if rng.random() > prob:
                         continue
                     units = max(1, int(rng.poisson(max(0.2, base_units * promo_boost))))
-                    list_price = float(p["base_list_price"]) * float(rng.normal(1.0,0.03))
+
+                    # Product/base price with row-level noise
+                    base_unit_list_price = float(p["base_list_price"]) * float(rng.normal(1.0, 0.03))
+
+                    # Apply channel price factor to get the actual unit list price for this sale row
+                    unit_list_price = base_unit_list_price * channel_price_factor[ch_name]
+                    unit_list_price = round(max(0.01, unit_list_price), 2)
+
+                    # Row-level discount (store as decimal rate, e.g. 0.12 = 12%)
                     discount_rate = float(np.clip(rng.normal(0.08 + promo_discount_extra, 0.035), 0, 0.35))
-                    gross = units * list_price
-                    if ch_name == "Wholesale":
-                        gross *= 0.88
-                    elif ch_name == "Distributor":
-                        gross *= 0.82
-                    net = gross * (1 - discount_rate)
-                    cogs = net * float(np.clip(p["base_cogs_ratio"] + rng.normal(0,0.015), 0.25, 0.75))
+                    discount_rate = round(discount_rate, 4)
+
+                    # Net unit price after discount
+                    unit_net_price = round(unit_list_price * (1 - discount_rate), 2)
+
+                    # Extended amounts
+                    gross = round(units * unit_list_price, 2)
+                    net = round(units * unit_net_price, 2)
+
+                    # Cost
+                    cogs_ratio = float(np.clip(p["base_cogs_ratio"] + rng.normal(0, 0.015), 0.25, 0.75))
+                    cogs = round(net * cogs_ratio, 2)
+
                     orders = max(1, int(np.ceil(units / rng.integers(2,6)))) if ch_name=="Retail" else max(1, int(np.ceil(units / rng.integers(8,20))))
                     customers = max(1, int(np.ceil(orders * rng.uniform(0.85,1.0))))
+                    # Add rows to fact table
                     rows.append({
-                        "date_key": int(drow["date_key"]),
-                        "product_key": int(p["product_key"]),
-                        "location_key": int(l["location_key"]),
-                        "channel_key": int(channels[ch_name]),
-                        "units_sold": units,
-                        "gross_sales_amount": round(float(gross),2),
-                        "discount_amount": round(float(gross-net),2),
-                        "net_sales_amount": round(float(net),2),
-                        "cogs_amount": round(float(cogs),2),
-                        "order_count": orders,
-                        "customer_count": customers,
+                    "date_key": int(drow["date_key"]),
+                    "product_key": int(p["product_key"]),
+                    "location_key": int(l["location_key"]),
+                    "channel_key": int(channels[ch_name]),
+                    "units_sold": units,
+                    "unit_list_price": unit_list_price,
+                    "unit_net_price": unit_net_price,
+                    "discount_rate": discount_rate,
+                    "gross_sales_amount": gross,
+                    "discount_amount": round(gross - net, 2),
+                    "net_sales_amount": net,
+                    "cogs_amount": cogs,
+                    "order_count": orders,
+                    "customer_count": customers,
                     })
     return pd.DataFrame(rows)
 
@@ -627,6 +596,9 @@ def build_sales_source_extract(fact_sales, dim_date, dim_product, dim_location, 
         "cogs": df["cogs_amount"],
         "orders": df["order_count"],
         "customers": df["customer_count"],
+        "unit_list_price": df["unit_list_price"],
+        "unit_net_price": df["unit_net_price"],
+        "discount_rate": df["discount_rate"],
     })
     dup_n = max(5, int(len(src) * 0.006))
     src = pd.concat([src, src.sample(n=dup_n, random_state=int(rng.integers(1,1_000_000)))], ignore_index=True)

@@ -45,6 +45,7 @@ This repo is built to demonstrate business analysis and analytics engineering ha
 │   ├── docs/
 │   └── reports/
 ├── 02_quarterly_dc_qaqc_system/         # DQ/QAQC controls + scorecard project
+├── 03_forecasting_variance_story        # Forecasting + variance analysis project (planned next)
 ├── 04_ghg_scope_reporting/              # GHG / ESG reporting + assurance-ready docs
 ├── shared/                              # Reusable patterns/templates across projects
 │   ├── sql/

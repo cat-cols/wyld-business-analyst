@@ -1,0 +1,6 @@
+product_key,source_product_code,product_name,brand_name,category_name,flavor_name,product_line,benefit_line,effect_type,ratio_label,pack_size,potency_mg_total,base_list_price,base_cogs_ratio,demand_weight,is_active
+1,SKU0001,Wyld Blood Orange 1:1 THC:CBC Gummies,Wyld,Gummies,Blood Orange,Bliss,Bliss,Sativa Enhanced,1:1 THC:CBC,10,100,10.06,0.4417,1.02,1
+2,SKU0002,Wyld Boysenberry 1:1:1 THC:CBD:CBN Gummies,Wyld,Gummies,Boysenberry,Dream,Dream,Indica Enhanced,1:1:1 THC:CBD:CBN,10,100,10.15,0.4775,1.08,1
+3,SKU0003,Wyld Elderberry 2:1 THC:CBN Gummies,Wyld,Gummies,Elderberry,Sleep,Sleep,Indica Enhanced,2:1 THC:CBN,10,100,10.09,0.4496,1.12,1
+4,SKU0004,Wyld Grapefruit 1:1:1 THC:CBG:CBC Gummies,Wyld,Gummies,Grapefruit,Revive,Revive,Sativa Enhanced,1:1:1 THC:CBG:CBC,10,100,10.53,0.4775,0.95,1
+5,SKU0005,Wyld Huckleberry THC Gummies,Wyld,Gummies,Huckleberry,Playful,Playful,Hybrid Enhanced,THC,10,100,10.0,0.4132,1.18,1

@@ -1,0 +1,13 @@
+table_name,row_count
+dim_date,365
+dim_product,15
+dim_location,15
+dim_channel,3
+dim_employee_group,8
+fact_sales,78289
+fact_inventory,82125
+fact_labor,43800
+src_sales_distributor_extract,78758
+src_inventory_erp_snapshot,82110
+src_labor_hours_payroll_export,43793
+src_finance_actuals_summary,60

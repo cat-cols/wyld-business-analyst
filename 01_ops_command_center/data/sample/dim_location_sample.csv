@@ -1,0 +1,4 @@
+location_key,source_location_code,location_name,state_province,region,location_type,preferred_channel,size_tier,volume_multiplier,is_active
+1,OR01,OR Site 01,OR,Pacific NW,Distributor Account,Wholesale,L,1.0803,1
+2,WA02,WA Site 02,WA,Pacific NW,Retail Account,Retail,M,0.889,1
+3,CA03,CA Site 03,CA,West,Retail Account,Retail,M,1.0998,1
