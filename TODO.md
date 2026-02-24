@@ -18,3 +18,24 @@
 - [ ] Ensure only small sample data is tracked
 - [ ] Finalize reproducible setup steps
 - [ ] Add clear simulation / no proprietary data disclaimer
+
+## README
+- [ ] Update the author line if you want a different display name
+- [ ] Add 2–3 screenshots (even placeholders) ASAP — that gives the repo instant visual credibility
+- [ ] If you want, I can also write a **killer Project 1 README** next so the root README links into something equally polished.
+
+
+## Screenshots (add these to strengthen the repo)
+Add these to `assets/screenshots/` and embed them here:
+
+- [ ] Ops Command Center dashboard
+- [ ] Reconciliation / data confidence page
+- [ ] DQ scorecard (Project 2)
+- [ ] GHG scorecard (Project 4)
+- [ ] Star schema / data flow diagram
+
+Example (replace paths once added):
+```md
+![Ops Command Center](assets/screenshots/ops_command_center.png)
+![DQ Scorecard](assets/screenshots/dq_scorecard.png)
+```
