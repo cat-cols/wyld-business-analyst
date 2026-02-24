@@ -1,0 +1,36 @@
+**/data/raw/
+**/data/processed/
+**/data/external/
+**/data/source_extracts/
+**/data/modeled/
+
+# ignore all databases + powerbi + sql
+environment/*
+!environment/.gitkeep
+!environment/README.md
+
+**/outputs/large/
+*.db
+*.sqlite
+*.sqlite3
+*.pbitmp
+.venv/
+.env
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+
+# personal notes
+notes/**
+
+# existing projects
+existing-projects.md
+job-description.md
+interview-questions.md
+resume.md
+cover-letter.md
+reaching-out.md
+timeline.md
+
+# old projects
+archive/**
