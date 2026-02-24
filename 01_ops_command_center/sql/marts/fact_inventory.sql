@@ -1,0 +1,1 @@
+-- Build fact_inventory (grain: date x product x location snapshot)

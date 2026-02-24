@@ -1,0 +1,1 @@
+-- Map staged inventory to dim_date, dim_product, dim_location

@@ -1,0 +1,1 @@
+-- Build fact_sales (grain: date x product x location x channel)

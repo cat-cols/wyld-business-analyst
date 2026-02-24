@@ -1,0 +1,41 @@
+# Core data stack
+numpy
+pandas
+pyarrow
+
+# Excel support (you already hit this one)
+openpyxl
+xlsxwriter
+
+# Database connectors / SQL workflows
+duckdb
+sqlalchemy
+psycopg2-binary
+
+# Config + validation
+pyyaml
+pydantic
+
+# Data quality / testing
+great-expectations
+pandera
+
+# Forecasting (Project 3)
+scikit-learn
+statsmodels
+prophet
+
+# Plotting / exports for docs (optional but useful)
+matplotlib
+
+# Utility
+python-dateutil
+
+
+###
+
+# bigquery
+
+# warehouse
+
+# snowflake-sqlalchemy >= 1.3.0

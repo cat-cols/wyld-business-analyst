@@ -1,0 +1,1 @@
+-- Map staged sales to dim_date, dim_product, dim_location, dim_channel

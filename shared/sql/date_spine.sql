@@ -1,0 +1,1 @@
+-- date spine generator snippet

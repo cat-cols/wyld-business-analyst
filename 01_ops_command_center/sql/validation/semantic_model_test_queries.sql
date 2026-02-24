@@ -1,0 +1,1 @@
+-- SQL totals used to validate Power BI visuals

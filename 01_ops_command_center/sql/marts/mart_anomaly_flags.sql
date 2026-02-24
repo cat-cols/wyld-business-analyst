@@ -1,0 +1,1 @@
+-- Build anomaly flags (rolling z-score / IQR) for margin drops and stockout spikes
