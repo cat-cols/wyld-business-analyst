@@ -1,4 +1,4 @@
-# Wyld Business Analyst Portfolio
+# Wyld Style Business Analyst Portfolio
 
 This repo is organized as a multi-project portfolio program.
 
