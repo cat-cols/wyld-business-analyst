@@ -27,7 +27,7 @@ __pycache__/
 *.xlsx
 
 # personal notes
-notes/**
+_notes/**
 docs/licenses_by_type.pdf
 
 # existing projects
