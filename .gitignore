@@ -27,7 +27,13 @@ __pycache__/
 *.xlsx
 
 # personal notes
-_notes/**
+notes/**
+
+01_ops_command_center/_notes/**
+02_quarterly_dc_qaqc_system/_notes/**
+03_forecasting_variance_story/_notes/**
+04_ghg_scope_reporting/_notes/**
+
 docs/licenses_by_type.pdf
 
 # existing projects

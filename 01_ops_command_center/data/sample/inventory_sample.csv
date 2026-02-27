@@ -1,0 +1,51 @@
+snapshot_date,sku,product_name,location_code,location_name,units_on_hand,units_on_order,reorder_point,max_stock_level
+2024-01-31,WYLD-RASP-10,Raspberry Gummies 10pk,OR,Oregon,1380,217,300,2500
+2024-01-31,WYLD-MARB-10,Marionberry Gummies 10pk,OR,Oregon,1559,376,300,2500
+2024-01-31,WYLD-HUCK-10,Huckleberry Gummies 10pk,OR,Oregon,1745,323,300,2500
+2024-01-31,WYLD-BLOO-10,Blood Orange Gummies 10pk,OR,Oregon,1374,201,300,2500
+2024-01-31,WYLD-CBD-HUCK,CBD Huckleberry Gummies,OR,Oregon,0,281,300,2500
+2024-01-31,WYLD-CBN-ELDE,CBN Elderberry Gummies,OR,Oregon,746,179,300,2500
+2024-01-31,WYLD-BEV-ELDE,Elderberry Beverage,OR,Oregon,940,212,300,2500
+2024-01-31,WYLD-BEV-RASP,Raspberry Beverage,OR,Oregon,596,162,300,2500
+2024-01-31,WYLD-RASP-10,Raspberry Gummies 10pk,WA,Washington,0,95,300,2500
+2024-01-31,WYLD-MARB-10,Marionberry Gummies 10pk,WA,Washington,1148,123,300,2500
+2024-01-31,WYLD-HUCK-10,Huckleberry Gummies 10pk,WA,Washington,2515,464,300,2500
+2024-01-31,WYLD-BLOO-10,Blood Orange Gummies 10pk,WA,Washington,1261,360,300,2500
+2024-01-31,WYLD-CBD-HUCK,CBD Huckleberry Gummies,WA,Washington,922,160,300,2500
+2024-01-31,WYLD-CBN-ELDE,CBN Elderberry Gummies,WA,Washington,2088,525,300,2500
+2024-01-31,WYLD-BEV-ELDE,Elderberry Beverage,WA,Washington,459,125,300,2500
+2024-01-31,WYLD-BEV-RASP,Raspberry Beverage,WA,Washington,254,55,300,2500
+2024-01-31,WYLD-RASP-10,Raspberry Gummies 10pk,CA,California,1492,309,300,2500
+2024-01-31,WYLD-MARB-10,Marionberry Gummies 10pk,CA,California,4117,748,300,2500
+2024-01-31,WYLD-HUCK-10,Huckleberry Gummies 10pk,CA,California,4377,934,300,2500
+2024-01-31,WYLD-BLOO-10,Blood Orange Gummies 10pk,CA,California,1889,238,300,2500
+2024-01-31,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CA,California,2999,781,300,2500
+2024-01-31,WYLD-CBN-ELDE,CBN Elderberry Gummies,CA,California,2034,459,300,2500
+2024-01-31,WYLD-BEV-ELDE,Elderberry Beverage,CA,California,1791,226,300,2500
+2024-01-31,WYLD-BEV-RASP,Raspberry Beverage,CA,California,0,173,300,2500
+2024-01-31,WYLD-RASP-10,Raspberry Gummies 10pk,CO,Colorado,1735,273,300,2500
+2024-01-31,WYLD-MARB-10,Marionberry Gummies 10pk,CO,Colorado,2210,598,300,2500
+2024-01-31,WYLD-HUCK-10,Huckleberry Gummies 10pk,CO,Colorado,672,149,300,2500
+2024-01-31,WYLD-BLOO-10,Blood Orange Gummies 10pk,CO,Colorado,2274,323,300,2500
+2024-01-31,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CO,Colorado,820,216,300,2500
+2024-01-31,WYLD-CBN-ELDE,CBN Elderberry Gummies,CO,Colorado,1520,412,300,2500
+2024-01-31,WYLD-BEV-ELDE,Elderberry Beverage,CO,Colorado,560,122,300,2500
+2024-01-31,WYLD-BEV-RASP,Raspberry Beverage,CO,Colorado,457,124,300,2500
+2024-01-31,WYLD-RASP-10,Raspberry Gummies 10pk,AZ,Arizona,2240,440,300,2500
+2024-01-31,WYLD-MARB-10,Marionberry Gummies 10pk,AZ,Arizona,0,297,300,2500
+2024-01-31,WYLD-HUCK-10,Huckleberry Gummies 10pk,AZ,Arizona,-23,179,300,2500
+2024-01-31,WYLD-BLOO-10,Blood Orange Gummies 10pk,AZ,Arizona,1884,277,300,2500
+2024-01-31,WYLD-CBD-HUCK,CBD Huckleberry Gummies,AZ,Arizona,1178,346,300,2500
+2024-01-31,WYLD-CBN-ELDE,CBN Elderberry Gummies,AZ,Arizona,0,419,300,2500
+2024-01-31,WYLD-BEV-ELDE,Elderberry Beverage,AZ,Arizona,291,54,300,2500
+2024-01-31,WYLD-BEV-RASP,Raspberry Beverage,AZ,Arizona,475,137,300,2500
+2024-02-29,WYLD-RASP-10,Raspberry Gummies 10pk,OR,Oregon,1046,153,300,2500
+2024-02-29,WYLD-MARB-10,Marionberry Gummies 10pk,OR,Oregon,910,117,300,2500
+2024-02-29,WYLD-HUCK-10,Huckleberry Gummies 10pk,OR,Oregon,1580,366,300,2500
+2024-02-29,WYLD-BLOO-10,Blood Orange Gummies 10pk,OR,Oregon,1495,422,300,2500
+2024-02-29,WYLD-CBD-HUCK,CBD Huckleberry Gummies,OR,Oregon,1590,209,300,2500
+2024-02-29,WYLD-CBN-ELDE,CBN Elderberry Gummies,OR,Oregon,1213,251,300,2500
+2024-02-29,WYLD-BEV-ELDE,Elderberry Beverage,OR,Oregon,514,127,300,2500
+2024-02-29,WYLD-BEV-RASP,Raspberry Beverage,OR,Oregon,696,79,300,2500
+2024-02-29,WYLD-RASP-10,Raspberry Gummies 10pk,WA,Washington,573,132,300,2500
+2024-02-29,WYLD-MARB-10,Marionberry Gummies 10pk,WA,Washington,989,250,300,2500

@@ -1,0 +1,31 @@
+{
+  "config": {
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31",
+    "seed": 42,
+    "n_products": 15,
+    "n_locations": 15,
+    "sales_duplicate_rate": 0.006,
+    "sales_missing_store_rate": 0.0025,
+    "sales_channel_mess_rate": 0.01,
+    "sales_product_trailing_space_rate": 0.008,
+    "sales_bad_date_rate": 0.01,
+    "write_dated_copies": true
+  },
+  "run_ts": "20260226_144524",
+  "repo_root": "/Users/b/data/projects/wyld-business-analyst",
+  "outputs": {
+    "modeled_dir": "/Users/b/data/projects/wyld-business-analyst/data/modeled",
+    "source_extracts": {
+      "sales": "/Users/b/data/projects/wyld-business-analyst/data/source_extracts/sales/sales_distributor_extract.csv",
+      "ops": "/Users/b/data/projects/wyld-business-analyst/data/source_extracts/ops/inventory_erp_snapshot.csv",
+      "people": "/Users/b/data/projects/wyld-business-analyst/data/source_extracts/people/labor_hours_payroll_export.xlsx",
+      "finance": "/Users/b/data/projects/wyld-business-analyst/data/source_extracts/finance/finance_actuals_summary.xlsx"
+    }
+  },
+  "notes": [
+    "Modeled CSVs are the truth layer.",
+    "Source extracts intentionally include controlled quality issues for QA/QC demos.",
+    "If write_dated_copies=true, a dated copy is also written under each domain folder."
+  ]
+}

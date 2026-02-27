@@ -49,3 +49,15 @@ Example (replace paths once added):
 
 ## Results / Insights
 - [ ] Add one “Results / Insights” section in root README with 3–5 bullets (what business questions Project 1 answers). Right now you describe architecture and process well, but business outcomes need one more spotlight
+
+
+---
+---
+
+- [ ] Add 01_ops_command_center/docs/metrics_dictionary.md (your repo-level dictionary is solid; now you need the project-level one to match what your root README claims)
+
+- [ ] A “DQ/reconciliation checks passing” screenshot (even from SQL output) is catnip for this job.
+
+# Add screenshots
+- [ ] A dashboard screenshot mock is fine if Power BI isn’t actually runnable on Mac.
+- [ ] A “DQ/reconciliation checks passing” screenshot (even from SQL output) is catnip for this job.

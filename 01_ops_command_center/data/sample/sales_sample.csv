@@ -1,0 +1,101 @@
+transaction_id,transaction_date,product_sku,product_name,state_code,state_name,channel,units_sold,gross_sales_amount,discount_amount,net_sales_amount,cogs_amount
+100000,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,OR,Oregon,Retail,40,999.6,0.0,999.6,380.0
+100001,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,OR,Oregon,Wholesale,8,199.92,0.0,199.92,76.0
+100002,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,OR,Oregon,Online,2,49.98,0.0,49.98,19.0
+100003,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,OR,Oregon,Retail,45,1124.55,56.23,1068.32,427.5
+100004,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,OR,Oregon,Wholesale,9,224.91,11.25,213.66,85.5
+100005,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,OR,Oregon,Online,4,99.96,0.0,99.96,38.0
+100006,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,OR,Oregon,Retail,25,624.75,0.0,624.75,237.5
+100007,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,OR,Oregon,Wholesale,13,324.87,0.0,324.87,123.5
+100008,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,OR,Oregon,Online,4,99.96,10.0,89.96,38.0
+100009,2024-01-01,,Blood Orange Gummies 10pk,OR,Oregon,Retail,19,474.81,23.74,451.07,180.5
+100010,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,OR,Oregon,Wholesale,19,474.81,47.48,427.33,180.5
+100011,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,OR,Oregon,Online,5,124.95,0.0,124.95,47.5
+100012,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,OR,Oregon,Retail,23,459.77,0.0,459.77,172.5
+100013,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,OR,Oregon,Wholesale,16,319.84,15.99,303.85,120.0
+100014,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,OR,Oregon,Online,1,19.99,0.0,19.99,7.5
+100015,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,OR,Oregon,Retail,27,755.73,0.0,755.73,297.0
+100016,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,OR,Oregon,Wholesale,5,139.95,14.0,125.95,55.0
+100017,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,OR,Oregon,Online,4,111.96,5.6,106.36,44.0
+100018,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,OR,Oregon,Retail,12,107.88,0.0,107.88,42.0
+100019,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,OR,Oregon,Wholesale,18,161.82,8.09,153.73,63.0
+100020,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,OR,Oregon,Online,4,35.96,3.6,32.36,14.0
+100021,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,OR,Oregon,Retail,37,332.63,0.0,332.63,129.5
+100022,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,OR,Oregon,Wholesale,12,107.88,10.79,97.09,42.0
+100023,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,OR,Oregon,Online,3,26.97,0.0,26.97,10.5
+100024,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,WA,Washington,Retail,59,1474.41,147.44,1326.97,560.5
+100025,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,WA,Washington,Wholesale,31,774.69,0.0,774.69,294.5
+100026,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,WA,Washington,Online,3,74.97,0.0,74.97,28.5
+100027,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,WA,Washington,Retail,25,624.75,0.0,624.75,237.5
+100028,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,WA,Washington,Wholesale,11,274.89,0.0,274.89,104.5
+100029,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,WA,Washington,Online,3,74.97,3.75,71.22,28.5
+100030,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,WA,Washington,Retail,23,574.77,0.0,574.77,218.5
+100031,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,WA,Washington,Wholesale,22,549.78,0.0,549.78,209.0
+100032,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,WA,Washington,Online,5,124.95,0.0,124.95,47.5
+100033,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,WA,Washington,Retail,36,899.64,0.0,899.64,342.0
+100034,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,WA,Washington,Wholesale,19,474.81,0.0,474.81,180.5
+100035,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,WA,Washington,Online,9,224.91,11.25,213.66,85.5
+100036,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,WA,Washington,Retail,19,379.81,18.99,360.82,142.5
+100037,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,WA,Washington,Wholesale,16,319.84,15.99,303.85,120.0
+100038,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,WA,Washington,Online,4,79.96,0.0,79.96,30.0
+100039,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,WA,Washington,Retail,43,1203.57,0.0,1203.57,473.0
+100040,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,WA,Washington,Wholesale,22,615.78,0.0,615.78,242.0
+100041,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,WA,Washington,Online,7,195.93,9.8,186.13,77.0
+100042,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,WA,Washington,Retail,54,485.46,0.0,485.46,189.0
+100043,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,WA,Washington,Wholesale,21,188.79,18.88,169.91,73.5
+100044,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,WA,Washington,Online,7,62.93,0.0,62.93,24.5
+100045,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,WA,Washington,Retail,43,386.57,0.0,386.57,150.5
+100046,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,WA,Washington,Wholesale,23,206.77,0.0,206.77,80.5
+100047,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,WA,Washington,Online,11,98.89,0.0,98.89,38.5
+100048,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CA,California,Retail,67,1674.33,0.0,1674.33,636.5
+100049,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CA,California,Wholesale,67,1674.33,83.72,1590.61,636.5
+100050,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CA,California,Online,11,274.89,0.0,274.89,104.5
+100051,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CA,California,Retail,93,2324.07,0.0,2324.07,883.5
+100052,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CA,California,Wholesale,40,999.6,0.0,999.6,380.0
+100053,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CA,California,Online,13,324.87,0.0,324.87,123.5
+100054,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CA,California,Retail,86,2149.14,0.0,2149.14,817.0
+100055,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CA,California,Wholesale,43,1074.57,0.0,1074.57,408.5
+100056,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CA,California,Online,22,549.78,0.0,549.78,209.0
+100057,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CA,California,Retail,31,774.69,0.0,774.69,294.5
+100058,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CA,California,Wholesale,38,949.62,0.0,949.62,361.0
+100059,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CA,California,Online,5,124.95,0.0,124.95,47.5
+100060,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CA,California,Retail,31,619.69,0.0,619.69,232.5
+100061,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CA,California,Wholesale,20,399.8,0.0,399.8,150.0
+100062,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CA,California,Online,13,259.87,0.0,259.87,97.5
+100063,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CA,California,Retail,35,979.65,48.98,930.67,385.0
+100064,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CA,California,Wholesale,31,867.69,0.0,867.69,341.0
+100065,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CA,California,Online,6,167.94,8.4,159.54,66.0
+100066,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CA,California,Retail,131,1177.69,0.0,1177.69,458.5
+100067,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CA,California,Wholesale,19,170.81,0.0,170.81,66.5
+100068,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CA,California,Online,5,44.95,0.0,44.95,17.5
+100069,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CA,California,Retail,109,979.91,0.0,979.91,381.5
+100070,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CA,California,Wholesale,40,359.6,0.0,359.6,140.0
+100071,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CA,California,Online,15,134.85,0.0,134.85,52.5
+100072,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CO,Colorado,Retail,45,1124.55,112.46,1012.09,427.5
+100073,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CO,Colorado,Wholesale,26,649.74,0.0,649.74,247.0
+100074,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,CO,Colorado,Online,10,249.9,0.0,249.9,95.0
+100075,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CO,Colorado,Retail,39,974.61,0.0,974.61,370.5
+100076,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CO,Colorado,Wholesale,21,524.79,26.24,498.55,199.5
+100077,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,CO,Colorado,Online,5,124.95,6.25,118.7,47.5
+100078,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CO,Colorado,Retail,37,924.63,92.46,832.17,351.5
+100079,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CO,Colorado,Wholesale,24,599.76,0.0,599.76,228.0
+100080,2024-01-01,WYLD-HUCK-10,Huckleberry Gummies 10pk,CO,Colorado,Online,5,124.95,12.5,112.45,47.5
+100081,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CO,Colorado,Retail,22,549.78,0.0,549.78,209.0
+100082,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CO,Colorado,Wholesale,13,324.87,0.0,324.87,123.5
+100083,2024-01-01,WYLD-BLOO-10,Blood Orange Gummies 10pk,CO,Colorado,Online,5,124.95,0.0,124.95,47.5
+100084,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CO,Colorado,Retail,21,419.79,20.99,398.8,157.5
+100085,2024-01-01,,CBD Huckleberry Gummies,CO,Colorado,Wholesale,11,219.89,0.0,219.89,82.5
+100086,2024-01-01,WYLD-CBD-HUCK,CBD Huckleberry Gummies,CO,Colorado,Online,6,119.94,0.0,119.94,45.0
+100087,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CO,Colorado,Retail,25,699.75,0.0,699.75,275.0
+100088,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CO,Colorado,Wholesale,26,727.74,0.0,727.74,286.0
+100089,2024-01-01,WYLD-CBN-ELDE,CBN Elderberry Gummies,CO,Colorado,Online,3,83.97,4.2,79.77,33.0
+100090,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CO,Colorado,Retail,38,341.62,0.0,341.62,133.0
+100091,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CO,Colorado,Wholesale,15,134.85,6.74,128.11,52.5
+100092,2024-01-01,WYLD-BEV-ELDE,Elderberry Beverage,CO,Colorado,Online,4,35.96,1.8,34.16,14.0
+100093,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CO,Colorado,Retail,33,296.67,0.0,296.67,115.5
+100094,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CO,Colorado,Wholesale,29,260.71,0.0,260.71,101.5
+100095,2024-01-01,WYLD-BEV-RASP,Raspberry Beverage,CO,Colorado,Online,9,80.91,0.0,80.91,31.5
+100096,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,AZ,Arizona,Retail,54,1349.46,134.95,1214.51,513.0
+100097,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,AZ,Arizona,Wholesale,12,299.88,0.0,299.88,114.0
+100098,2024-01-01,WYLD-RASP-10,Raspberry Gummies 10pk,AZ,Arizona,Online,6,149.94,0.0,149.94,57.0
+100099,2024-01-01,WYLD-MARB-10,Marionberry Gummies 10pk,AZ,Arizona,Retail,25,624.75,62.48,562.28,237.5

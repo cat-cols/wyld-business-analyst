@@ -1,0 +1,9 @@
+source_id,file_name,relative_path,row_count,col_count,generated_at,notes
+SRC-001,sales_distributor_extract.csv,data/source_extracts/sales/sales_distributor_extract.csv,80996,15,2026-02-26T14:45:53,duplicates; missing Store ID; channel casing/whitespace; date format mix; product trailing spaces; header inconsistencies
+SRC-002,inventory_erp_snapshot.csv,data/source_extracts/ops/inventory_erp_snapshot.csv,82110,8,2026-02-26T14:45:53,negative On Hand exceptions; site code formatting drift; one missing snapshot day; header inconsistencies
+SRC-003,labor_hours_payroll_export.xlsx,data/source_extracts/people/labor_hours_payroll_export.xlsx,43793,8,2026-02-26T14:45:53,team spelling variation; zero hours with cost rows; missing week window; header inconsistencies
+SRC-004,finance_actuals_summary.xlsx,data/source_extracts/finance/finance_actuals_summary.xlsx,60,4,2026-02-26T14:45:53,metric label variation; small reconciliation drift
+SRC-001,sales_distributor_extract.csv,data/source_extracts/sales/20260226_144524/sales_distributor_extract.csv,80996,15,2026-02-26T14:46:01,dated copy
+SRC-002,inventory_erp_snapshot.csv,data/source_extracts/ops/20260226_144524/inventory_erp_snapshot.csv,82110,8,2026-02-26T14:46:01,dated copy
+SRC-003,labor_hours_payroll_export.xlsx,data/source_extracts/people/20260226_144524/labor_hours_payroll_export.xlsx,43793,8,2026-02-26T14:46:01,dated copy
+SRC-004,finance_actuals_summary.xlsx,data/source_extracts/finance/20260226_144524/finance_actuals_summary.xlsx,60,4,2026-02-26T14:46:01,dated copy
