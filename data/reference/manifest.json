@@ -1,0 +1,162 @@
+{
+  "dataset_id": "or_cannabis_business_licenses",
+  "title": "Oregon cannabis business licenses (raw) + filtered recreational retailer/wholesaler subset (derived)",
+  "description": "Reference dataset used to seed and validate dispensary/location master data in Wyld Business Analyst portfolio projects. The raw Excel file is kept as an immutable source drop; the derived CSV is a cleaned, deduplicated subset filtered to recreational retailers and/or wholesalers.",
+  "owners": [
+    "B"
+  ],
+  "created_at": "2026-02-28T03:09:18",
+  "updated_at": "2026-02-28T03:09:18",
+  "source": {
+    "human_name": "Cannabis Business Licenses (Excel export)",
+    "notes": "This is the original Excel file as obtained from your chosen public/source system. Keep it unchanged; any transformations should produce new derived files.",
+    "retrieved_at": null,
+    "license_or_terms": "Unknown (treat as external reference data; do not redistribute unless permitted)."
+  },
+  "files": [
+    {
+      "path": "data/reference/or_cannabis_licenses/raw/Cannabis-Business-Licenses-All.xlsx",
+      "role": "raw",
+      "format": "xlsx",
+      "bytes": 321459,
+      "sha256": "c69b60773cd47adaf86c52effae25a5291a940ae23ce5f5bde62532156b1f980",
+      "last_modified_local": "2026-02-28T03:07:51"
+    },
+    {
+      "path": "data/reference/or_cannabis_licenses/derived/or_recreational_retailers_wholesalers_filtered.csv",
+      "role": "derived",
+      "format": "csv",
+      "bytes": 199930,
+      "sha256": "6653abf8ea68747c6e8865bae9bf354cef8e485b6218c20c953bcea166183882",
+      "last_modified_local": "2026-02-28T03:07:51",
+      "rows": 1059,
+      "columns": [
+        "license_number",
+        "business_name",
+        "license_group",
+        "business_licenses",
+        "license_type",
+        "physical_address",
+        "county",
+        "expiration_date",
+        "tier",
+        "canopy_type",
+        "indoor_canopy_sqft",
+        "outdoor_canopy_sqft",
+        "endorsement",
+        "sos_registration_number"
+      ],
+      "primary_key": [
+        "license_number"
+      ]
+    }
+  ],
+  "build": {
+    "script": "scripts/build_or_license_reference.py",
+    "command_example": "python3 scripts/build_or_license_reference.py --src notes/data/Cannabis-Business-Licenses-All.xlsx --project-dir 01_ops_command_center",
+    "outputs": [
+      "01_ops_command_center/data/reference/or_recreational_retailers_wholesalers_filtered.csv",
+      "01_ops_command_center/docs/or_recreational_retailers_wholesalers_summary.csv"
+    ],
+    "filters": {
+      "license_group": [
+        "Recreational Retailer",
+        "Recreational Wholesaler",
+        "Recreational Retailer/Wholesaler"
+      ],
+      "text_match_logic": "license_text contains 'recreat' AND ('retail' OR 'wholesal')"
+    },
+    "dedupe": {
+      "key": "license_number",
+      "keep": "last by expiration_date (if present), else last seen"
+    }
+  },
+  "derived_schema": [
+    {
+      "name": "license_number",
+      "type": "string",
+      "description": "License number for the location (unique in derived file)."
+    },
+    {
+      "name": "business_name",
+      "type": "string",
+      "description": "Business name as listed in the source export."
+    },
+    {
+      "name": "license_group",
+      "type": "string",
+      "description": "Bucketed group: Retailer / Wholesaler / Retailer+Wholesaler."
+    },
+    {
+      "name": "business_licenses",
+      "type": "string",
+      "description": "Free-text license description field from the source."
+    },
+    {
+      "name": "license_type",
+      "type": "string",
+      "description": "License type from the source export."
+    },
+    {
+      "name": "physical_address",
+      "type": "string",
+      "description": "Physical address if provided in the source."
+    },
+    {
+      "name": "county",
+      "type": "string",
+      "description": "County (title-cased)."
+    },
+    {
+      "name": "expiration_date",
+      "type": "date",
+      "description": "Expiration date if provided; may be blank."
+    },
+    {
+      "name": "tier",
+      "type": "string",
+      "description": "Tier if provided."
+    },
+    {
+      "name": "canopy_type",
+      "type": "string",
+      "description": "Canopy type if provided."
+    },
+    {
+      "name": "indoor_canopy_sqft",
+      "type": "number",
+      "description": "Indoor canopy square feet if provided."
+    },
+    {
+      "name": "outdoor_canopy_sqft",
+      "type": "number",
+      "description": "Outdoor canopy square feet if provided."
+    },
+    {
+      "name": "endorsement",
+      "type": "string",
+      "description": "Endorsement if provided."
+    },
+    {
+      "name": "sos_registration_number",
+      "type": "string",
+      "description": "SOS registration number if provided."
+    }
+  ],
+  "quick_stats": {
+    "rows": 1059,
+    "unique_license_number": 1059,
+    "license_group_counts": {
+      "Recreational Retailer": 794,
+      "Recreational Wholesaler": 263,
+      "Recreational Retailer/Wholesaler": 2
+    }
+  },
+  "intended_consumers": [
+    {
+      "project": "01_ops_command_center",
+      "usage": "Seed/validate dispensary master (reference dimension) and join to simulated store_code / accounts.",
+      "suggested_raw_table": "raw.dispensary_master (or raw.or_license_reference)"
+    }
+  ]
+}

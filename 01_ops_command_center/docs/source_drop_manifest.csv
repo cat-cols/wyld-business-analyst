@@ -1,148 +1,232 @@
 domain,system,cadence,drop_date,file_type,relative_path,target,row_count,notes,load_id
-sales,distributor,daily,2025-01-01,csv,data/source_extracts/sales/distributor/incoming/2025/01/01/sales_distributor_extract.csv,,1277,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-01,postgres,,raw.sales_distributor_extract,1277,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-01,csv,data/source_extracts/sales/pos/incoming/2025/01/01/pos_transactions.csv,,685,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-01,postgres,,raw.pos_transactions_csv,685,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-01,csv,data/source_extracts/ops/erp/incoming/2025/01/01/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-01,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-01,csv,data/source_extracts/ops/wms/incoming/2025/01/01/wms_shipments.csv,,131,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-01,postgres,,raw.wms_shipments,131,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-01,csv,data/source_extracts/people/timeclock/incoming/2025/01/01/timeclock_punches.csv,,233,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-01,postgres,,raw.timeclock_punches,233,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-02,csv,data/source_extracts/sales/distributor/incoming/2025/01/02/sales_distributor_extract.csv,,1289,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-02,postgres,,raw.sales_distributor_extract,1289,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-02,csv,data/source_extracts/sales/pos/incoming/2025/01/02/pos_transactions.csv,,654,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-02,postgres,,raw.pos_transactions_csv,654,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-02,csv,data/source_extracts/ops/erp/incoming/2025/01/02/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-02,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-02,csv,data/source_extracts/ops/wms/incoming/2025/01/02/wms_shipments.csv,,120,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-02,postgres,,raw.wms_shipments,120,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-02,csv,data/source_extracts/people/timeclock/incoming/2025/01/02/timeclock_punches.csv,,214,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-02,postgres,,raw.timeclock_punches,214,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-03,csv,data/source_extracts/sales/distributor/incoming/2025/01/03/sales_distributor_extract.csv,,1283,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-03,postgres,,raw.sales_distributor_extract,1283,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-03,csv,data/source_extracts/sales/pos/incoming/2025/01/03/pos_transactions.csv,,664,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-03,postgres,,raw.pos_transactions_csv,664,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-03,csv,data/source_extracts/ops/erp/incoming/2025/01/03/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-03,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-03,csv,data/source_extracts/ops/wms/incoming/2025/01/03/wms_shipments.csv,,106,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-03,postgres,,raw.wms_shipments,106,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-03,csv,data/source_extracts/people/timeclock/incoming/2025/01/03/timeclock_punches.csv,,240,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-03,postgres,,raw.timeclock_punches,240,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-04,csv,data/source_extracts/sales/distributor/incoming/2025/01/04/sales_distributor_extract.csv,,1199,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-04,postgres,,raw.sales_distributor_extract,1199,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-04,csv,data/source_extracts/sales/pos/incoming/2025/01/04/pos_transactions.csv,,709,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-04,postgres,,raw.pos_transactions_csv,709,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-04,csv,data/source_extracts/ops/erp/incoming/2025/01/04/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-04,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-04,csv,data/source_extracts/ops/wms/incoming/2025/01/04/wms_shipments.csv,,120,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-04,postgres,,raw.wms_shipments,120,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-04,csv,data/source_extracts/people/timeclock/incoming/2025/01/04/timeclock_punches.csv,,255,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-04,postgres,,raw.timeclock_punches,255,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-05,csv,data/source_extracts/sales/distributor/incoming/2025/01/05/sales_distributor_extract.csv,,1138,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-05,postgres,,raw.sales_distributor_extract,1138,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-05,csv,data/source_extracts/sales/pos/incoming/2025/01/05/pos_transactions.csv,,789,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-05,postgres,,raw.pos_transactions_csv,789,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-05,csv,data/source_extracts/ops/erp/incoming/2025/01/05/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-05,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-05,csv,data/source_extracts/ops/wms/incoming/2025/01/05/wms_shipments.csv,,122,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-05,postgres,,raw.wms_shipments,122,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-05,csv,data/source_extracts/people/timeclock/incoming/2025/01/05/timeclock_punches.csv,,242,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-05,postgres,,raw.timeclock_punches,242,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-06,csv,data/source_extracts/sales/distributor/incoming/2025/01/06/sales_distributor_extract.csv,,1266,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-06,postgres,,raw.sales_distributor_extract,1266,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-06,csv,data/source_extracts/sales/pos/incoming/2025/01/06/pos_transactions.csv,,664,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-06,postgres,,raw.pos_transactions_csv,664,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-06,csv,data/source_extracts/ops/erp/incoming/2025/01/06/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-06,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-06,csv,data/source_extracts/ops/wms/incoming/2025/01/06/wms_shipments.csv,,139,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-06,postgres,,raw.wms_shipments,139,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-06,csv,data/source_extracts/people/timeclock/incoming/2025/01/06/timeclock_punches.csv,,222,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-06,postgres,,raw.timeclock_punches,222,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-07,csv,data/source_extracts/sales/distributor/incoming/2025/01/07/sales_distributor_extract.csv,,1256,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-07,postgres,,raw.sales_distributor_extract,1256,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-07,csv,data/source_extracts/sales/pos/incoming/2025/01/07/pos_transactions.csv,,767,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-07,postgres,,raw.pos_transactions_csv,767,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-07,csv,data/source_extracts/ops/erp/incoming/2025/01/07/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-07,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-07,csv,data/source_extracts/ops/wms/incoming/2025/01/07/wms_shipments.csv,,113,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-07,postgres,,raw.wms_shipments,113,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-07,csv,data/source_extracts/people/timeclock/incoming/2025/01/07/timeclock_punches.csv,,247,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-07,postgres,,raw.timeclock_punches,247,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-08,csv,data/source_extracts/sales/distributor/incoming/2025/01/08/sales_distributor_extract.csv,,1302,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-08,postgres,,raw.sales_distributor_extract,1302,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-08,csv,data/source_extracts/sales/pos/incoming/2025/01/08/pos_transactions.csv,,727,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-08,postgres,,raw.pos_transactions_csv,727,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-08,csv,data/source_extracts/ops/erp/incoming/2025/01/08/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-08,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-08,csv,data/source_extracts/ops/wms/incoming/2025/01/08/wms_shipments.csv,,130,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-08,postgres,,raw.wms_shipments,130,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-08,csv,data/source_extracts/people/timeclock/incoming/2025/01/08/timeclock_punches.csv,,247,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-08,postgres,,raw.timeclock_punches,247,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-09,csv,data/source_extracts/sales/distributor/incoming/2025/01/09/sales_distributor_extract.csv,,1245,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-09,postgres,,raw.sales_distributor_extract,1245,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-09,csv,data/source_extracts/sales/pos/incoming/2025/01/09/pos_transactions.csv,,625,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-09,postgres,,raw.pos_transactions_csv,625,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-09,csv,data/source_extracts/ops/erp/incoming/2025/01/09/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-09,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-09,csv,data/source_extracts/ops/wms/incoming/2025/01/09/wms_shipments.csv,,109,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-09,postgres,,raw.wms_shipments,109,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-09,csv,data/source_extracts/people/timeclock/incoming/2025/01/09/timeclock_punches.csv,,227,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-09,postgres,,raw.timeclock_punches,227,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-10,csv,data/source_extracts/sales/distributor/incoming/2025/01/10/sales_distributor_extract.csv,,1239,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-10,postgres,,raw.sales_distributor_extract,1239,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-10,csv,data/source_extracts/sales/pos/incoming/2025/01/10/pos_transactions.csv,,879,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-10,postgres,,raw.pos_transactions_csv,879,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-10,csv,data/source_extracts/ops/erp/incoming/2025/01/10/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-10,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-10,csv,data/source_extracts/ops/wms/incoming/2025/01/10/wms_shipments.csv,,120,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-10,postgres,,raw.wms_shipments,120,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-10,csv,data/source_extracts/people/timeclock/incoming/2025/01/10/timeclock_punches.csv,,286,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-10,postgres,,raw.timeclock_punches,286,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-11,csv,data/source_extracts/sales/distributor/incoming/2025/01/11/sales_distributor_extract.csv,,1176,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-11,postgres,,raw.sales_distributor_extract,1176,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-11,csv,data/source_extracts/sales/pos/incoming/2025/01/11/pos_transactions.csv,,723,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-11,postgres,,raw.pos_transactions_csv,723,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-11,csv,data/source_extracts/ops/erp/incoming/2025/01/11/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-11,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-11,csv,data/source_extracts/ops/wms/incoming/2025/01/11/wms_shipments.csv,,103,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-11,postgres,,raw.wms_shipments,103,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-11,csv,data/source_extracts/people/timeclock/incoming/2025/01/11/timeclock_punches.csv,,212,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-11,postgres,,raw.timeclock_punches,212,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-12,csv,data/source_extracts/sales/distributor/incoming/2025/01/12/sales_distributor_extract.csv,,1125,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-12,postgres,,raw.sales_distributor_extract,1125,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-12,csv,data/source_extracts/sales/pos/incoming/2025/01/12/pos_transactions.csv,,606,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-12,postgres,,raw.pos_transactions_csv,606,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-12,csv,data/source_extracts/ops/erp/incoming/2025/01/12/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-12,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-12,csv,data/source_extracts/ops/wms/incoming/2025/01/12/wms_shipments.csv,,120,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-12,postgres,,raw.wms_shipments,120,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-12,csv,data/source_extracts/people/timeclock/incoming/2025/01/12/timeclock_punches.csv,,202,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-12,postgres,,raw.timeclock_punches,202,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-13,csv,data/source_extracts/sales/distributor/incoming/2025/01/13/sales_distributor_extract.csv,,1268,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-13,postgres,,raw.sales_distributor_extract,1268,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-13,csv,data/source_extracts/sales/pos/incoming/2025/01/13/pos_transactions.csv,,812,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-13,postgres,,raw.pos_transactions_csv,812,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-13,csv,data/source_extracts/ops/erp/incoming/2025/01/13/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-13,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-13,csv,data/source_extracts/ops/wms/incoming/2025/01/13/wms_shipments.csv,,109,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-13,postgres,,raw.wms_shipments,109,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-13,csv,data/source_extracts/people/timeclock/incoming/2025/01/13/timeclock_punches.csv,,240,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-13,postgres,,raw.timeclock_punches,240,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-sales,distributor,daily,2025-01-14,csv,data/source_extracts/sales/distributor/incoming/2025/01/14/sales_distributor_extract.csv,,1251,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,77a1f8c5a7b7
-sales,distributor,daily,2025-01-14,postgres,,raw.sales_distributor_extract,1251,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-sales,pos,daily,2025-01-14,csv,data/source_extracts/sales/pos/incoming/2025/01/14/pos_transactions.csv,,707,row-level POS; some bad datetime formats; missing store_code possible,77a1f8c5a7b7
-sales,pos,daily,2025-01-14,postgres,,raw.pos_transactions_csv,707,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-ops,erp,daily,2025-01-14,csv,data/source_extracts/ops/erp/incoming/2025/01/14/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),77a1f8c5a7b7
-ops,erp,daily,2025-01-14,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-ops,wms,daily,2025-01-14,csv,data/source_extracts/ops/wms/incoming/2025/01/14/wms_shipments.csv,,107,duplicates; occasional missing sku,77a1f8c5a7b7
-ops,wms,daily,2025-01-14,postgres,,raw.wms_shipments,107,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,timeclock,daily,2025-01-14,csv,data/source_extracts/people/timeclock/incoming/2025/01/14/timeclock_punches.csv,,244,missing OUT punches; mixed timestamp formats,77a1f8c5a7b7
-people,timeclock,daily,2025-01-14,postgres,,raw.timeclock_punches,244,loaded standardized + parsed timestamps + normalized keys into postgres,77a1f8c5a7b7
-people,payroll,weekly,2025-01-05,xlsx,data/source_extracts/people/payroll/incoming/2025/01/05/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,77a1f8c5a7b7
-people,payroll,weekly,2025-01-05,postgres,,raw.labor_hours_payroll_export,320,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-people,payroll,weekly,2025-01-12,xlsx,data/source_extracts/people/payroll/incoming/2025/01/12/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,77a1f8c5a7b7
-people,payroll,weekly,2025-01-12,postgres,,raw.labor_hours_payroll_export,320,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
-finance,erp_finance,monthly,2025-01-01,xlsx,data/source_extracts/finance/erp_finance/incoming/2025/01/01/finance_actuals_summary.xlsx,,5,metric label variance; small drift,77a1f8c5a7b7
-finance,erp_finance,monthly,2025-01-01,postgres,,raw.finance_actuals_summary,5,loaded standardized into postgres,77a1f8c5a7b7
-finance,gl,monthly,2025-01-01,postgres,,raw.gl_detail_csv,897,loaded standardized + normalized keys into postgres,77a1f8c5a7b7
+sales,distributor,daily,2025-01-01,csv,data/source_extracts/sales/distributor/incoming/2025/01/01/sales_distributor_extract.csv,,1277,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-01,postgres,,raw.sales_distributor_extract,1277,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-01,csv,data/source_extracts/reference/crm/incoming/2025/01/01/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-01,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-01,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/01/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-01,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-01,csv,data/source_extracts/reference/assortment/incoming/2025/01/01/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-01,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-01,csv,data/source_extracts/sales/pos/incoming/2025/01/01/pos_transactions.csv,,724,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-01,postgres,,raw.pos_transactions_csv,724,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-01,csv,data/source_extracts/ops/erp/incoming/2025/01/01/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-01,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-01,csv,data/source_extracts/ops/wms/incoming/2025/01/01/wms_shipments.csv,,128,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-01,postgres,,raw.wms_shipments,128,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-01,csv,data/source_extracts/people/timeclock/incoming/2025/01/01/timeclock_punches.csv,,226,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-01,postgres,,raw.timeclock_punches,226,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-02,csv,data/source_extracts/sales/distributor/incoming/2025/01/02/sales_distributor_extract.csv,,1285,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-02,postgres,,raw.sales_distributor_extract,1285,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-02,csv,data/source_extracts/reference/crm/incoming/2025/01/02/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-02,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-02,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/02/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-02,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-02,csv,data/source_extracts/reference/assortment/incoming/2025/01/02/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-02,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-02,csv,data/source_extracts/sales/pos/incoming/2025/01/02/pos_transactions.csv,,589,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-02,postgres,,raw.pos_transactions_csv,589,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-02,csv,data/source_extracts/ops/erp/incoming/2025/01/02/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-02,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-02,csv,data/source_extracts/ops/wms/incoming/2025/01/02/wms_shipments.csv,,134,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-02,postgres,,raw.wms_shipments,134,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-02,csv,data/source_extracts/people/timeclock/incoming/2025/01/02/timeclock_punches.csv,,227,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-02,postgres,,raw.timeclock_punches,227,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-03,csv,data/source_extracts/sales/distributor/incoming/2025/01/03/sales_distributor_extract.csv,,1259,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-03,postgres,,raw.sales_distributor_extract,1259,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-03,csv,data/source_extracts/reference/crm/incoming/2025/01/03/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-03,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-03,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/03/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-03,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-03,csv,data/source_extracts/reference/assortment/incoming/2025/01/03/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-03,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-03,csv,data/source_extracts/sales/pos/incoming/2025/01/03/pos_transactions.csv,,728,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-03,postgres,,raw.pos_transactions_csv,728,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-03,csv,data/source_extracts/ops/erp/incoming/2025/01/03/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-03,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-03,csv,data/source_extracts/ops/wms/incoming/2025/01/03/wms_shipments.csv,,95,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-03,postgres,,raw.wms_shipments,95,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-03,csv,data/source_extracts/people/timeclock/incoming/2025/01/03/timeclock_punches.csv,,233,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-03,postgres,,raw.timeclock_punches,233,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-04,csv,data/source_extracts/sales/distributor/incoming/2025/01/04/sales_distributor_extract.csv,,1196,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-04,postgres,,raw.sales_distributor_extract,1196,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-04,csv,data/source_extracts/reference/crm/incoming/2025/01/04/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-04,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-04,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/04/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-04,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-04,csv,data/source_extracts/reference/assortment/incoming/2025/01/04/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-04,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-04,csv,data/source_extracts/sales/pos/incoming/2025/01/04/pos_transactions.csv,,587,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-04,postgres,,raw.pos_transactions_csv,587,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-04,csv,data/source_extracts/ops/erp/incoming/2025/01/04/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-04,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-04,csv,data/source_extracts/ops/wms/incoming/2025/01/04/wms_shipments.csv,,97,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-04,postgres,,raw.wms_shipments,97,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-04,csv,data/source_extracts/people/timeclock/incoming/2025/01/04/timeclock_punches.csv,,229,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-04,postgres,,raw.timeclock_punches,229,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-05,csv,data/source_extracts/sales/distributor/incoming/2025/01/05/sales_distributor_extract.csv,,1155,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-05,postgres,,raw.sales_distributor_extract,1155,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-05,csv,data/source_extracts/reference/crm/incoming/2025/01/05/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-05,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-05,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/05/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-05,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-05,csv,data/source_extracts/reference/assortment/incoming/2025/01/05/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-05,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-05,csv,data/source_extracts/sales/pos/incoming/2025/01/05/pos_transactions.csv,,645,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-05,postgres,,raw.pos_transactions_csv,645,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-05,csv,data/source_extracts/ops/erp/incoming/2025/01/05/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-05,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-05,csv,data/source_extracts/ops/wms/incoming/2025/01/05/wms_shipments.csv,,142,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-05,postgres,,raw.wms_shipments,142,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-05,csv,data/source_extracts/people/timeclock/incoming/2025/01/05/timeclock_punches.csv,,233,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-05,postgres,,raw.timeclock_punches,233,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-06,csv,data/source_extracts/sales/distributor/incoming/2025/01/06/sales_distributor_extract.csv,,1241,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-06,postgres,,raw.sales_distributor_extract,1241,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-06,csv,data/source_extracts/reference/crm/incoming/2025/01/06/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-06,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-06,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/06/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-06,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-06,csv,data/source_extracts/reference/assortment/incoming/2025/01/06/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-06,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-06,csv,data/source_extracts/sales/pos/incoming/2025/01/06/pos_transactions.csv,,771,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-06,postgres,,raw.pos_transactions_csv,771,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-06,csv,data/source_extracts/ops/erp/incoming/2025/01/06/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-06,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-06,csv,data/source_extracts/ops/wms/incoming/2025/01/06/wms_shipments.csv,,138,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-06,postgres,,raw.wms_shipments,138,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-06,csv,data/source_extracts/people/timeclock/incoming/2025/01/06/timeclock_punches.csv,,232,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-06,postgres,,raw.timeclock_punches,232,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-07,csv,data/source_extracts/sales/distributor/incoming/2025/01/07/sales_distributor_extract.csv,,1284,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-07,postgres,,raw.sales_distributor_extract,1284,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-07,csv,data/source_extracts/reference/crm/incoming/2025/01/07/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-07,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-07,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/07/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-07,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-07,csv,data/source_extracts/reference/assortment/incoming/2025/01/07/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-07,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-07,csv,data/source_extracts/sales/pos/incoming/2025/01/07/pos_transactions.csv,,760,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-07,postgres,,raw.pos_transactions_csv,760,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-07,csv,data/source_extracts/ops/erp/incoming/2025/01/07/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-07,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-07,csv,data/source_extracts/ops/wms/incoming/2025/01/07/wms_shipments.csv,,97,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-07,postgres,,raw.wms_shipments,97,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-07,csv,data/source_extracts/people/timeclock/incoming/2025/01/07/timeclock_punches.csv,,226,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-07,postgres,,raw.timeclock_punches,226,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-08,csv,data/source_extracts/sales/distributor/incoming/2025/01/08/sales_distributor_extract.csv,,1259,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-08,postgres,,raw.sales_distributor_extract,1259,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-08,csv,data/source_extracts/reference/crm/incoming/2025/01/08/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-08,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-08,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/08/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-08,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-08,csv,data/source_extracts/reference/assortment/incoming/2025/01/08/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-08,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-08,csv,data/source_extracts/sales/pos/incoming/2025/01/08/pos_transactions.csv,,743,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-08,postgres,,raw.pos_transactions_csv,743,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-08,csv,data/source_extracts/ops/erp/incoming/2025/01/08/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-08,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-08,csv,data/source_extracts/ops/wms/incoming/2025/01/08/wms_shipments.csv,,108,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-08,postgres,,raw.wms_shipments,108,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-08,csv,data/source_extracts/people/timeclock/incoming/2025/01/08/timeclock_punches.csv,,243,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-08,postgres,,raw.timeclock_punches,243,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-09,csv,data/source_extracts/sales/distributor/incoming/2025/01/09/sales_distributor_extract.csv,,1258,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-09,postgres,,raw.sales_distributor_extract,1258,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-09,csv,data/source_extracts/reference/crm/incoming/2025/01/09/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-09,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-09,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/09/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-09,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-09,csv,data/source_extracts/reference/assortment/incoming/2025/01/09/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-09,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-09,csv,data/source_extracts/sales/pos/incoming/2025/01/09/pos_transactions.csv,,583,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-09,postgres,,raw.pos_transactions_csv,583,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-09,csv,data/source_extracts/ops/erp/incoming/2025/01/09/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-09,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-09,csv,data/source_extracts/ops/wms/incoming/2025/01/09/wms_shipments.csv,,117,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-09,postgres,,raw.wms_shipments,117,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-09,csv,data/source_extracts/people/timeclock/incoming/2025/01/09/timeclock_punches.csv,,185,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-09,postgres,,raw.timeclock_punches,185,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-10,csv,data/source_extracts/sales/distributor/incoming/2025/01/10/sales_distributor_extract.csv,,1304,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-10,postgres,,raw.sales_distributor_extract,1304,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-10,csv,data/source_extracts/reference/crm/incoming/2025/01/10/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-10,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-10,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/10/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-10,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-10,csv,data/source_extracts/reference/assortment/incoming/2025/01/10/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-10,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-10,csv,data/source_extracts/sales/pos/incoming/2025/01/10/pos_transactions.csv,,677,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-10,postgres,,raw.pos_transactions_csv,677,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-10,csv,data/source_extracts/ops/erp/incoming/2025/01/10/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-10,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-10,csv,data/source_extracts/ops/wms/incoming/2025/01/10/wms_shipments.csv,,127,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-10,postgres,,raw.wms_shipments,127,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-10,csv,data/source_extracts/people/timeclock/incoming/2025/01/10/timeclock_punches.csv,,211,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-10,postgres,,raw.timeclock_punches,211,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-11,csv,data/source_extracts/sales/distributor/incoming/2025/01/11/sales_distributor_extract.csv,,1169,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-11,postgres,,raw.sales_distributor_extract,1169,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-11,csv,data/source_extracts/reference/crm/incoming/2025/01/11/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-11,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-11,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/11/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-11,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-11,csv,data/source_extracts/reference/assortment/incoming/2025/01/11/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-11,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-11,csv,data/source_extracts/sales/pos/incoming/2025/01/11/pos_transactions.csv,,632,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-11,postgres,,raw.pos_transactions_csv,632,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-11,csv,data/source_extracts/ops/erp/incoming/2025/01/11/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-11,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-11,csv,data/source_extracts/ops/wms/incoming/2025/01/11/wms_shipments.csv,,123,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-11,postgres,,raw.wms_shipments,123,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-11,csv,data/source_extracts/people/timeclock/incoming/2025/01/11/timeclock_punches.csv,,227,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-11,postgres,,raw.timeclock_punches,227,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-12,csv,data/source_extracts/sales/distributor/incoming/2025/01/12/sales_distributor_extract.csv,,1153,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-12,postgres,,raw.sales_distributor_extract,1153,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-12,csv,data/source_extracts/reference/crm/incoming/2025/01/12/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-12,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-12,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/12/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-12,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-12,csv,data/source_extracts/reference/assortment/incoming/2025/01/12/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-12,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-12,csv,data/source_extracts/sales/pos/incoming/2025/01/12/pos_transactions.csv,,632,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-12,postgres,,raw.pos_transactions_csv,632,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-12,csv,data/source_extracts/ops/erp/incoming/2025/01/12/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-12,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-12,csv,data/source_extracts/ops/wms/incoming/2025/01/12/wms_shipments.csv,,103,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-12,postgres,,raw.wms_shipments,103,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-12,csv,data/source_extracts/people/timeclock/incoming/2025/01/12/timeclock_punches.csv,,285,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-12,postgres,,raw.timeclock_punches,285,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-13,csv,data/source_extracts/sales/distributor/incoming/2025/01/13/sales_distributor_extract.csv,,1268,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-13,postgres,,raw.sales_distributor_extract,1268,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-13,csv,data/source_extracts/reference/crm/incoming/2025/01/13/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-13,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-13,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/13/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-13,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-13,csv,data/source_extracts/reference/assortment/incoming/2025/01/13/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-13,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-13,csv,data/source_extracts/sales/pos/incoming/2025/01/13/pos_transactions.csv,,733,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-13,postgres,,raw.pos_transactions_csv,733,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-13,csv,data/source_extracts/ops/erp/incoming/2025/01/13/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-13,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-13,csv,data/source_extracts/ops/wms/incoming/2025/01/13/wms_shipments.csv,,108,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-13,postgres,,raw.wms_shipments,108,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-13,csv,data/source_extracts/people/timeclock/incoming/2025/01/13/timeclock_punches.csv,,231,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-13,postgres,,raw.timeclock_punches,231,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+sales,distributor,daily,2025-01-14,csv,data/source_extracts/sales/distributor/incoming/2025/01/14/sales_distributor_extract.csv,,1267,messy headers + duplicates + missing Store ID + channel casing/whitespace + date format mix,3466ab038728
+sales,distributor,daily,2025-01-14,postgres,,raw.sales_distributor_extract,1267,loaded standardized + normalized keys into postgres,3466ab038728
+reference,crm,daily,2025-01-14,csv,data/source_extracts/reference/crm/incoming/2025/01/14/account_status.csv,,43,account status master; casing/whitespace drift; occasional missing store_code; mixed date formats,3466ab038728
+reference,crm,daily,2025-01-14,postgres,,raw.account_status,43,loaded standardized account_status into postgres,3466ab038728
+reference,dispensary_master,daily,2025-01-14,csv,data/source_extracts/reference/dispensary_master/incoming/2025/01/14/dispensary_master.csv,,43,dispensary master snapshot; messy casing/whitespace; occasional missing keys,3466ab038728
+reference,dispensary_master,daily,2025-01-14,postgres,,raw.dispensary_master,43,loaded standardized dispensary_master into postgres,3466ab038728
+reference,assortment,daily,2025-01-14,csv,data/source_extracts/reference/assortment/incoming/2025/01/14/sku_distribution_status.csv,,618,sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats,3466ab038728
+reference,assortment,daily,2025-01-14,postgres,,raw.sku_distribution_status,618,loaded standardized sku_distribution_status into postgres,3466ab038728
+sales,pos,daily,2025-01-14,csv,data/source_extracts/sales/pos/incoming/2025/01/14/pos_transactions.csv,,707,row-level POS; some bad datetime formats; missing store_code possible,3466ab038728
+sales,pos,daily,2025-01-14,postgres,,raw.pos_transactions_csv,707,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+ops,erp,daily,2025-01-14,csv,data/source_extracts/ops/erp/incoming/2025/01/14/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift (lowercase + hyphen),3466ab038728
+ops,erp,daily,2025-01-14,postgres,,raw.inventory_erp_snapshot,600,loaded standardized + normalized keys into postgres,3466ab038728
+ops,wms,daily,2025-01-14,csv,data/source_extracts/ops/wms/incoming/2025/01/14/wms_shipments.csv,,125,duplicates; occasional missing sku,3466ab038728
+ops,wms,daily,2025-01-14,postgres,,raw.wms_shipments,125,loaded standardized + normalized keys into postgres,3466ab038728
+people,timeclock,daily,2025-01-14,csv,data/source_extracts/people/timeclock/incoming/2025/01/14/timeclock_punches.csv,,220,missing OUT punches; mixed timestamp formats,3466ab038728
+people,timeclock,daily,2025-01-14,postgres,,raw.timeclock_punches,220,loaded standardized + parsed timestamps + normalized keys into postgres,3466ab038728
+people,payroll,weekly,2025-01-05,xlsx,data/source_extracts/people/payroll/incoming/2025/01/05/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,3466ab038728
+people,payroll,weekly,2025-01-05,postgres,,raw.labor_hours_payroll_export,320,loaded standardized + normalized keys into postgres,3466ab038728
+people,payroll,weekly,2025-01-12,xlsx,data/source_extracts/people/payroll/incoming/2025/01/12/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,3466ab038728
+people,payroll,weekly,2025-01-12,postgres,,raw.labor_hours_payroll_export,320,loaded standardized + normalized keys into postgres,3466ab038728
+finance,erp_finance,monthly,2025-01-01,xlsx,data/source_extracts/finance/erp_finance/incoming/2025/01/01/finance_actuals_summary.xlsx,,5,metric label variance; small drift,3466ab038728
+finance,erp_finance,monthly,2025-01-01,postgres,,raw.finance_actuals_summary,5,loaded standardized into postgres,3466ab038728
+finance,gl,monthly,2025-01-01,postgres,,raw.gl_detail_csv,767,loaded standardized + normalized keys into postgres,3466ab038728

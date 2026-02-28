@@ -232,6 +232,57 @@ def maybe_bad_date_format(series: pd.Series, rng: np.random.Generator, pct: floa
 # Generators (DataFrames)
 # -----------------------------
 
+def gen_account_status_day(cfg: Config, rng: np.random.Generator, d: pd.Timestamp, stores: pd.DataFrame) -> pd.DataFrame:
+    statuses = ["Active", "Inactive", "Suspended", "Pending"]
+    reasons = {
+        "Active": ["In good standing", "Onboarding complete", "Reactivated"],
+        "Inactive": ["No recent orders", "Closed location", "Seasonal"],
+        "Suspended": ["Compliance hold", "Payment issue", "Contract dispute"],
+        "Pending": ["Onboarding", "Awaiting documents", "Credit review"],
+    }
+
+    rows: list[dict[str, Any]] = []
+    for _, s in stores.iterrows():
+        p = rng.random()
+        if p < 0.78:
+            st = "Active"
+        elif p < 0.90:
+            st = "Inactive"
+        elif p < 0.96:
+            st = "Pending"
+        else:
+            st = "Suspended"
+
+        rows.append(
+            {
+                "status_date": d.strftime("%Y-%m-%d"),
+                "store_code": s["store_id"],
+                "account_status": st,
+                "status_reason": str(rng.choice(reasons[st])),
+            }
+        )
+
+    df = pd.DataFrame(rows)
+    if len(df) == 0:
+        return df
+
+    # inject mess similar to your other sources
+    df = maybe_duplicates(df, rng, cfg.pct_duplicate / 2)
+    df["store_code"] = maybe_missing(df["store_code"], rng, cfg.pct_missing_store / 2)
+    df["account_status"] = maybe_channel_mess(df["account_status"], rng, 0.08)  # casing/whitespace
+    df["status_reason"] = maybe_trailing_spaces(df["status_reason"], rng, 0.06)
+    df["status_date"] = maybe_bad_date_format(df["status_date"], rng, cfg.pct_bad_date_format / 2)
+
+    # optional header drift (keeps it realistic)
+    return df.rename(
+        columns={
+            "status_date": "Status Date",
+            "store_code": "Store Code",
+            "account_status": "Account Status",
+            "status_reason": "Status Reason",
+        }
+    )
+
 def gen_sales_distributor_day(cfg: Config, rng: np.random.Generator, d: pd.Timestamp, stores: pd.DataFrame) -> pd.DataFrame:
     channels = ["Retail", "Wholesale", "Distributor"]
     rows: list[dict[str, Any]] = []
@@ -585,6 +636,181 @@ def gen_gl_detail_month(cfg: Config, rng: np.random.Generator, month_start: pd.T
     df["location_code"] = maybe_missing(df["location_code"], rng, 0.003)
     return df
 
+def gen_dispensary_master_day(
+    cfg: Config,
+    rng: np.random.Generator,
+    d: pd.Timestamp,
+    stores: pd.DataFrame
+) -> pd.DataFrame:
+    """
+    Dispensary master snapshot (reference system).
+    One row per store/account, with stable identifiers + some realistic drift/mess.
+    Output is *messy* (header drift), like your other file drops.
+    """
+
+    # lightweight city pool by state
+    cities = {
+        "OR": ["Portland", "Eugene", "Salem", "Bend", "Gresham"],
+        "WA": ["Seattle", "Tacoma", "Spokane", "Vancouver", "Olympia"],
+        "CA": ["Los Angeles", "San Diego", "San Jose", "Sacramento", "Oakland"],
+        "CO": ["Denver", "Boulder", "Aurora", "Fort Collins", "Colorado Springs"],
+        "AZ": ["Phoenix", "Tucson", "Mesa", "Tempe", "Scottsdale"],
+        "NV": ["Las Vegas", "Reno", "Henderson", "Sparks", "Carson City"],
+        "IL": ["Chicago", "Aurora", "Naperville", "Joliet", "Evanston"],
+        "MI": ["Detroit", "Grand Rapids", "Ann Arbor", "Lansing", "Flint"],
+    }
+
+    acct_types = ["Sell-To", "Not Sell-To", "Prospect", "House", "Key Account"]
+
+    rows: list[dict[str, Any]] = []
+    for i, s in enumerate(stores.itertuples(index=False), start=1):
+        state = getattr(s, "state", None) or str(getattr(s, "store_id"))[:2]
+        city = str(rng.choice(cities.get(state, ["Unknown"])))
+
+        # stable-ish ids
+        dispensary_id = f"DSP{i:05d}"
+        store_code = getattr(s, "store_id")
+
+        # make plausible postal
+        postal = f"{int(rng.integers(97000, 99950)):05d}" if state in ("OR", "WA") else f"{int(rng.integers(10000, 99950)):05d}"
+
+        # license formats vary by state (fake but plausible)
+        license_id = f"{state}-LIC-{int(rng.integers(100000, 999999))}"
+
+        name = getattr(s, "store_name", None) or f"{state} Dispensary {i:03d}"
+        acct_type = str(rng.choice(acct_types))
+
+        rows.append(
+            {
+                "as_of_date": d.strftime("%Y-%m-%d"),
+                "dispensary_id": dispensary_id,
+                "store_code": store_code,
+                "dispensary_name": name,
+                "state": state,
+                "city": city,
+                "postal_code": postal,
+                "license_id": license_id,
+                "account_type": acct_type,
+            }
+        )
+
+    df = pd.DataFrame(rows)
+    if len(df) == 0:
+        return df
+
+    # ---- inject mess (like your other sources) ----
+    df = maybe_duplicates(df, rng, cfg.pct_duplicate / 3)
+
+    # occasional missing keys
+    df["dispensary_id"] = maybe_missing(df["dispensary_id"], rng, 0.01)
+    df["store_code"] = maybe_missing(df["store_code"], rng, cfg.pct_missing_store / 3)
+
+    # casing/whitespace drift
+    df["dispensary_name"] = maybe_trailing_spaces(df["dispensary_name"], rng, 0.06)
+    df["city"] = maybe_channel_mess(df["city"], rng, 0.08)          # reuses your casing/whitespace injector
+    df["account_type"] = maybe_channel_mess(df["account_type"], rng, 0.10)
+
+    # date format mix
+    df["as_of_date"] = maybe_bad_date_format(df["as_of_date"], rng, cfg.pct_bad_date_format / 3)
+
+    # slight postal mess (ZIP+4 sometimes)
+    idx = rng.choice(df.index.to_numpy(), size=min(10, len(df)), replace=False)
+    df.loc[idx, "postal_code"] = df.loc[idx, "postal_code"].astype(str) + "-" + rng.integers(1000, 9999, size=len(idx)).astype(str)
+
+    # optional header drift to look like a messy extract
+    return df.rename(
+        columns={
+            "as_of_date": "As Of Date",
+            "dispensary_id": "Dispensary ID",
+            "store_code": "Store Code",
+            "dispensary_name": "Dispensary Name",
+            "state": "State",
+            "city": "City",
+            "postal_code": "Postal Code",
+            "license_id": "License ID",
+            "account_type": "Account Type",
+        }
+    )
+
+def gen_sku_distribution_status_day(cfg: Config, rng: np.random.Generator, d: pd.Timestamp, stores: pd.DataFrame) -> pd.DataFrame:
+    """
+    Daily snapshot: for each store and SKU, whether that SKU is carried / not_carried / pending / discontinued.
+
+    Returns a MESSY dataframe with header drift:
+      As Of Date, Store Code, SKU, Distribution Status, Status Reason
+    """
+    statuses = ["Carried", "Not Carried", "Pending", "Discontinued"]
+    reasons = {
+        "Carried": ["Active assortment", "Top seller", "Seasonal promo", "Core lineup"],
+        "Not Carried": ["Not authorized", "No demand", "Out of scope", "Limited shelf space"],
+        "Pending": ["Onboarding", "Awaiting PO", "Awaiting compliance docs", "License verification"],
+        "Discontinued": ["Discontinued SKU", "Replaced by new SKU", "Quality issue", "Low margin"],
+    }
+
+    rows: list[dict[str, Any]] = []
+
+    # store-level "assortment intensity" so not every store carries everything
+    store_intensity = {}
+    for _, s in stores.iterrows():
+        # Most stores carry a decent chunk; some are sparse.
+        store_intensity[s["store_id"]] = float(np.clip(rng.normal(0.70, 0.18), 0.15, 0.95))
+
+    for _, s in stores.iterrows():
+        store_code = s["store_id"]
+        intensity = store_intensity[store_code]
+
+        for prod in WYLD_PRODUCTS[: cfg.n_products]:
+            sku = prod["sku"]
+
+            # probability of "carried" depends on store intensity + tiny sku wiggle
+            p_carried = float(np.clip(intensity + rng.normal(0.0, 0.06), 0.05, 0.98))
+            r = rng.random()
+
+            if r < p_carried:
+                st = "Carried"
+            else:
+                # non-carried states get split
+                r2 = rng.random()
+                if r2 < 0.55:
+                    st = "Not Carried"
+                elif r2 < 0.80:
+                    st = "Pending"
+                else:
+                    st = "Discontinued"
+
+            rows.append(
+                {
+                    "as_of_date": d.strftime("%Y-%m-%d"),
+                    "store_code": store_code,
+                    "sku": sku,
+                    "distribution_status": st,
+                    "status_reason": str(rng.choice(reasons[st])),
+                }
+            )
+
+    df = pd.DataFrame(rows)
+    if len(df) == 0:
+        return df
+
+    # --- inject mess ---
+    df = maybe_duplicates(df, rng, cfg.pct_duplicate / 2)
+    df["store_code"] = maybe_missing(df["store_code"], rng, cfg.pct_missing_store / 2)
+    df["sku"] = maybe_missing(df["sku"], rng, 0.01)
+    df["distribution_status"] = maybe_channel_mess(df["distribution_status"], rng, 0.10)  # casing/whitespace drift
+    df["status_reason"] = maybe_trailing_spaces(df["status_reason"], rng, 0.08)
+    df["as_of_date"] = maybe_bad_date_format(df["as_of_date"], rng, cfg.pct_bad_date_format / 2)
+
+    # header drift (realistic upstream export)
+    return df.rename(
+        columns={
+            "as_of_date": "As Of Date",
+            "store_code": "Store Code",
+            "sku": "SKU",
+            "distribution_status": "Distribution Status",
+            "status_reason": "Status Reason",
+        }
+    )
+
 
 # -----------------------------
 # Postgres helpers
@@ -763,6 +989,80 @@ def _ensure_cols(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
             out[c] = None
     return out
 
+def standardize_sku_distribution_status(df_mess: pd.DataFrame) -> pd.DataFrame:
+    """
+    Standardizes the messy SKU distribution status snapshot into stable raw landing columns:
+      as_of_date_raw, as_of_date,
+      store_code_raw, store_code_norm,
+      sku_raw, sku_norm,
+      distribution_status_raw, distribution_status_norm,
+      status_reason_raw, status_reason_norm
+    """
+    rename = {
+        "As Of Date": "as_of_date_raw",
+        "Store Code": "store_code_raw",
+        "SKU": "sku_raw",
+        "Distribution Status": "distribution_status_raw",
+        "Status Reason": "status_reason_raw",
+        # tolerate already-clean headers too
+        "as_of_date": "as_of_date_raw",
+        "store_code": "store_code_raw",
+        "sku": "sku_raw",
+        "distribution_status": "distribution_status_raw",
+        "status_reason": "status_reason_raw",
+    }
+
+    df = df_mess.rename(columns={k: v for k, v in rename.items() if k in df_mess.columns}).copy()
+    df = _ensure_cols(
+        df,
+        [
+            "as_of_date_raw",
+            "store_code_raw",
+            "sku_raw",
+            "distribution_status_raw",
+            "status_reason_raw",
+        ],
+    )
+
+    def _norm_distribution_status(x: Any) -> Optional[str]:
+        if x is None:
+            return None
+        s = str(x).strip().lower()
+        if s == "" or s in ("nan", "none"):
+            return None
+
+        # IMPORTANT ordering: handle "not" before "carried"/"active"
+        if "not" in s or "no " in s or "none" in s:
+            return "not_carried"
+        if "discont" in s or "de-list" in s or "delist" in s:
+            return "discontinued"
+        if "pend" in s or "await" in s or "onboard" in s:
+            return "pending"
+        if "carry" in s or "active" in s or "in dist" in s or "in_distribution" in s:
+            return "carried"
+
+        # fall back: keep a safe normalized token
+        return s.replace(" ", "_")
+
+    out = pd.DataFrame(
+        {
+            "as_of_date_raw": df["as_of_date_raw"],
+            "as_of_date": df["as_of_date_raw"].map(_parse_date_any),
+
+            "store_code_raw": df["store_code_raw"],
+            "store_code_norm": df["store_code_raw"].map(_norm_code),
+
+            "sku_raw": df["sku_raw"],
+            "sku_norm": df["sku_raw"].map(_norm_code),
+
+            "distribution_status_raw": df["distribution_status_raw"],
+            "distribution_status_norm": df["distribution_status_raw"].map(_norm_distribution_status),
+
+            "status_reason_raw": df["status_reason_raw"],
+            "status_reason_norm": df["status_reason_raw"].map(lambda x: str(x).strip().lower() if x is not None else None),
+        }
+    )
+    return out
 
 def standardize_sales_distributor(df_mess: pd.DataFrame) -> pd.DataFrame:
     # Handle header drift from generator
@@ -1059,6 +1359,132 @@ def standardize_gl(df_raw: pd.DataFrame) -> pd.DataFrame:
     )
     return out
 
+def standardize_account_status(df_mess: pd.DataFrame) -> pd.DataFrame:
+    # accept either header-drifted columns OR non-drifted (more robust)
+    rename = {
+        "Status Date": "status_date_raw",
+        "status_date": "status_date_raw",
+        "Store Code": "store_code_raw",
+        "store_code": "store_code_raw",
+        "Account Status": "account_status_raw",
+        "account_status": "account_status_raw",
+        "Status Reason": "status_reason_raw",
+        "status_reason": "status_reason_raw",
+    }
+    df = df_mess.rename(columns=rename).copy()
+    df = _ensure_cols(df, ["status_date_raw", "store_code_raw", "account_status_raw", "status_reason_raw"])
+
+    def _norm_status(x: Any) -> Optional[str]:
+        if x is None:
+            return None
+        s = str(x).strip().lower()
+        if s == "" or s in ("nan", "none"):
+            return None
+
+        # IMPORTANT: check inactive before active
+        if "inactive" in s:
+            return "inactive"
+        if "suspend" in s:
+            return "suspended"
+        if "pending" in s:
+            return "pending"
+        if "active" in s:
+            return "active"
+        return s
+
+    out = pd.DataFrame(
+        {
+            "status_date_raw": df["status_date_raw"],
+            "status_date": df["status_date_raw"].map(_parse_date_any),
+
+            "store_code_raw": df["store_code_raw"],
+            "store_code_norm": df["store_code_raw"].map(_norm_code),
+
+            "account_status_raw": df["account_status_raw"],
+            "account_status_norm": df["account_status_raw"].map(_norm_status),
+
+            "status_reason_raw": df["status_reason_raw"],
+            "status_reason_norm": df["status_reason_raw"].map(lambda x: str(x).strip().lower() if x is not None else None),
+        }
+    )
+    return out
+
+def standardize_dispensary_master(df_mess: pd.DataFrame) -> pd.DataFrame:
+    rename = {
+        "As Of Date": "as_of_date_raw",
+        "Dispensary ID": "dispensary_id_raw",
+        "Store Code": "store_code_raw",
+        "Dispensary Name": "dispensary_name_raw",
+        "State": "state_raw",
+        "City": "city_raw",
+        "Postal Code": "postal_code_raw",
+        "License ID": "license_id_raw",
+        "Account Type": "account_type_raw",
+    }
+    df = df_mess.rename(columns=rename).copy()
+    df = _ensure_cols(
+        df,
+        [
+            "as_of_date_raw",
+            "dispensary_id_raw",
+            "store_code_raw",
+            "dispensary_name_raw",
+            "state_raw",
+            "city_raw",
+            "postal_code_raw",
+            "license_id_raw",
+            "account_type_raw",
+        ],
+    )
+
+    def _norm_postal(x: Any) -> Optional[str]:
+        if x is None:
+            return None
+        s = str(x).strip()
+        if s == "" or s.lower() in ("nan", "none"):
+            return None
+        s = re.sub(r"\s+", "", s)
+        return s
+
+    def _norm_state(x: Any) -> Optional[str]:
+        if x is None:
+            return None
+        s = str(x).strip().upper()
+        if s == "" or s.lower() in ("nan", "none"):
+            return None
+        return s[:2]
+
+    out = pd.DataFrame(
+        {
+            "as_of_date_raw": df["as_of_date_raw"],
+            "as_of_date": df["as_of_date_raw"].map(_parse_date_any),
+
+            "dispensary_id_raw": df["dispensary_id_raw"],
+            "dispensary_id_norm": df["dispensary_id_raw"].map(_norm_code),
+
+            "store_code_raw": df["store_code_raw"],
+            "store_code_norm": df["store_code_raw"].map(_norm_code),
+
+            "dispensary_name_raw": df["dispensary_name_raw"],
+            "dispensary_name_norm": df["dispensary_name_raw"].map(lambda x: str(x).strip() if x is not None else None),
+
+            "state_raw": df["state_raw"],
+            "state_norm": df["state_raw"].map(_norm_state),
+
+            "city_raw": df["city_raw"],
+            "city_norm": df["city_raw"].map(lambda x: str(x).strip().lower() if x is not None else None),
+
+            "postal_code_raw": df["postal_code_raw"],
+            "postal_code_norm": df["postal_code_raw"].map(_norm_postal),
+
+            "license_id_raw": df["license_id_raw"],
+            "license_id_norm": df["license_id_raw"].map(lambda x: str(x).strip().upper() if x is not None else None),
+
+            "account_type_raw": df["account_type_raw"],
+            "account_type_norm": df["account_type_raw"].map(lambda x: str(x).strip().lower() if x is not None else None),
+        }
+    )
+    return out
 
 def add_ingestion_metadata(df: pd.DataFrame, *, load_id: str, source_system: str, cadence: str, drop_date: pd.Timestamp) -> pd.DataFrame:
     out = df.copy()
@@ -1259,6 +1685,79 @@ DDL_TABLES: dict[str, list[str]] = {
         "drop_date date",
         "ingested_at timestamp",
     ],
+        "project1_account_status": [
+        "status_date_raw text",
+        "status_date date",
+        "store_code_raw text",
+        "store_code_norm text",
+        "account_status_raw text",
+        "account_status_norm text",
+        "status_reason_raw text",
+        "status_reason_norm text",
+        "load_id text",
+        "source_system text",
+        "cadence text",
+        "drop_date date",
+        "ingested_at timestamp",
+    ],
+        "project1_dispensary_master": [
+        # snapshot date (optional but consistent)
+        "as_of_date_raw text",
+        "as_of_date date",
+
+        # keys
+        "dispensary_id_raw text",
+        "dispensary_id_norm text",
+        "store_code_raw text",
+        "store_code_norm text",
+
+        # identity
+        "dispensary_name_raw text",
+        "dispensary_name_norm text",
+
+        # location
+        "state_raw text",
+        "state_norm text",
+        "city_raw text",
+        "city_norm text",
+        "postal_code_raw text",
+        "postal_code_norm text",
+
+        # optional business attrs
+        "license_id_raw text",
+        "license_id_norm text",
+        "account_type_raw text",
+        "account_type_norm text",
+
+        # ingestion metadata
+        "load_id text",
+        "source_system text",
+        "cadence text",
+        "drop_date date",
+        "ingested_at timestamp",
+    ],
+        "project1_sku_distribution_status": [
+        "as_of_date_raw text",
+        "as_of_date date",
+
+        "store_code_raw text",
+        "store_code_norm text",
+
+        "sku_raw text",
+        "sku_norm text",
+
+        "distribution_status_raw text",
+        "distribution_status_norm text",
+
+        "status_reason_raw text",
+        "status_reason_norm text",
+
+        "load_id text",
+        "source_system text",
+        "cadence text",
+        "drop_date date",
+        "ingested_at timestamp",
+    ],
 }
 
 
@@ -1300,7 +1799,10 @@ def main() -> None:
         default=os.getenv("PROJECT1_PG_LOAD_MODE", "append"),
         help="How to load each run into the target tables",
     )
+
     # Default raw table names (aligned to your existing raw schema naming)
+    ap.add_argument("--t-account-status", default=os.getenv("PROJECT1_T_ACCOUNT_STATUS", "account_status"), help="Raw account status table name (default: account_status)",)
+    ap.add_argument("--t-dispensary-master", default=os.getenv("PROJECT1_T_DISPENSARY_MASTER", "dispensary_master"))
     ap.add_argument("--t-sales-distributor", default=os.getenv("PROJECT1_T_SALES_DISTRIBUTOR", "sales_distributor_extract"))
     ap.add_argument("--t-pos",              default=os.getenv("PROJECT1_T_POS",              "pos_transactions_csv"))
     ap.add_argument("--t-inventory",        default=os.getenv("PROJECT1_T_INVENTORY",        "inventory_erp_snapshot"))
@@ -1309,6 +1811,7 @@ def main() -> None:
     ap.add_argument("--t-payroll",          default=os.getenv("PROJECT1_T_PAYROLL",          "labor_hours_payroll_export"))
     ap.add_argument("--t-finance-actuals",  default=os.getenv("PROJECT1_T_FIN_ACTUALS",      "finance_actuals_summary"))
     ap.add_argument("--t-gl",               default=os.getenv("PROJECT1_T_GL",               "gl_detail_csv"))
+    ap.add_argument("--t-sku-distribution-status", default=os.getenv("PROJECT1_T_SKU_DISTRIBUTION_STATUS", "sku_distribution_status"),help="Raw SKU distribution status table name",)
 
     args = ap.parse_args()
 
@@ -1345,6 +1848,9 @@ def main() -> None:
         args.t_payroll,
         args.t_finance_actuals,
         args.t_gl,
+        args.t_account_status,
+        args.t_dispensary_master,
+        args.t_sku_distribution_status,
     ]
 
     # Build DDL on the fly for custom table names by copying canonical DDL
@@ -1359,7 +1865,10 @@ def main() -> None:
         args.t_payroll: "project1_payroll_weekly",
         args.t_finance_actuals: "project1_finance_actuals",
         args.t_gl: "project1_gl_detail",
-    }
+        args.t_account_status: "project1_account_status",
+        args.t_dispensary_master: "project1_dispensary_master",
+        args.t_sku_distribution_status: "project1_sku_distribution_status",
+            }
     for actual_name, canonical in canonical_map.items():
         if args.pg_ddl_mode == "drop_and_create":
             pg_drop_table(con, args.pg_schema, actual_name)
@@ -1443,6 +1952,144 @@ def main() -> None:
             target=f"{args.pg_schema}.{args.t_sales_distributor}",
         )
 
+        # reference: account status CSV + Postgres raw
+        acct_mess = gen_account_status_day(cfg, rng, d, stores)
+
+        p_in = incoming_dir(root, "reference", "crm", d)
+        p_cur = current_dir(root, "reference", "crm")
+        p_in.mkdir(parents=True, exist_ok=True)
+        p_cur.mkdir(parents=True, exist_ok=True)
+
+        f_in = p_in / "account_status.csv"
+        f_cur = p_cur / "account_status.csv"
+        acct_mess.to_csv(f_in, index=False)
+        acct_mess.to_csv(f_cur, index=False)
+
+        log(
+            domain="reference",
+            system="crm",
+            cadence="daily",
+            drop_date=d,
+            file_path=f_in,
+            file_type="csv",
+            rows=len(acct_mess),
+            notes="account status master; casing/whitespace drift; occasional missing store_code; mixed date formats",
+        )
+
+        acct_std = standardize_account_status(acct_mess)
+        acct_std = add_ingestion_metadata(acct_std, load_id=load_id, source_system="reference_account_status", cadence="daily", drop_date=d)
+        acct_std = df_for_copy(acct_std)
+
+        pg_copy_append(con, args.pg_schema, args.t_account_status, acct_std)
+
+        log(
+            domain="reference",
+            system="crm",
+            cadence="daily",
+            drop_date=d,
+            file_path=None,
+            file_type="postgres",
+            rows=len(acct_std),
+            notes="loaded standardized account_status into postgres",
+            target=f"{args.pg_schema}.{args.t_account_status}",
+        )
+
+        # reference: dispensary master CSV + Postgres raw
+        disp_mess = gen_dispensary_master_day(cfg, rng, d, stores)
+
+        p_in = incoming_dir(root, "reference", "dispensary_master", d)
+        p_cur = current_dir(root, "reference", "dispensary_master")
+        p_in.mkdir(parents=True, exist_ok=True)
+        p_cur.mkdir(parents=True, exist_ok=True)
+
+        f_in = p_in / "dispensary_master.csv"
+        f_cur = p_cur / "dispensary_master.csv"
+        disp_mess.to_csv(f_in, index=False)
+        disp_mess.to_csv(f_cur, index=False)
+
+        log(
+            domain="reference",
+            system="dispensary_master",
+            cadence="daily",
+            drop_date=d,
+            file_path=f_in,
+            file_type="csv",
+            rows=len(disp_mess),
+            notes="dispensary master snapshot; messy casing/whitespace; occasional missing keys",
+        )
+
+        disp_std = standardize_dispensary_master(disp_mess)
+        disp_std = add_ingestion_metadata(
+            disp_std,
+            load_id=load_id,
+            source_system="reference_dispensary_master",
+            cadence="daily",
+            drop_date=d,
+        )
+        disp_std = df_for_copy(disp_std)
+
+        pg_copy_append(con, args.pg_schema, args.t_dispensary_master, disp_std)
+
+        log(
+            domain="reference",
+            system="dispensary_master",
+            cadence="daily",
+            drop_date=d,
+            file_path=None,
+            file_type="postgres",
+            rows=len(disp_std),
+            notes="loaded standardized dispensary_master into postgres",
+            target=f"{args.pg_schema}.{args.t_dispensary_master}",
+        )
+        # --- DAILY: sku distribution status (CSV + Postgres raw) ---
+        sku_dist_mess = gen_sku_distribution_status_day(cfg, rng, d, stores)
+
+        # write messy file drops
+        p_in = incoming_dir(root, "reference", "assortment", d)
+        p_cur = current_dir(root, "reference", "assortment")
+        p_in.mkdir(parents=True, exist_ok=True)
+        p_cur.mkdir(parents=True, exist_ok=True)
+
+        f_in = p_in / "sku_distribution_status.csv"
+        f_cur = p_cur / "sku_distribution_status.csv"
+        sku_dist_mess.to_csv(f_in, index=False)
+        sku_dist_mess.to_csv(f_cur, index=False)
+
+        log(
+            domain="reference",
+            system="assortment",
+            cadence="daily",
+            drop_date=d,
+            file_path=f_in,
+            file_type="csv",
+            rows=len(sku_dist_mess),
+            notes="sku distribution status snapshot; casing/whitespace drift; occasional missing store_code/sku; mixed date formats",
+        )
+
+        # standardize + load to Postgres raw
+        sku_dist_std = standardize_sku_distribution_status(sku_dist_mess)
+        sku_dist_std = add_ingestion_metadata(
+            sku_dist_std,
+            load_id=load_id,
+            source_system="reference_sku_distribution_status",
+            cadence="daily",
+            drop_date=d,
+        )
+        sku_dist_std = df_for_copy(sku_dist_std)
+
+        pg_copy_append(con, args.pg_schema, args.t_sku_distribution_status, sku_dist_std)
+
+        log(
+            domain="reference",
+            system="assortment",
+            cadence="daily",
+            drop_date=d,
+            file_path=None,
+            file_type="postgres",
+            rows=len(sku_dist_std),
+            notes="loaded standardized sku_distribution_status into postgres",
+            target=f"{args.pg_schema}.{args.t_sku_distribution_status}",
+        )
         # sales: pos CSV
         pos_raw = gen_pos_transactions_day(cfg, rng, d, stores)
         p_in = incoming_dir(root, "sales", "pos", d)
@@ -1724,4 +2371,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    main()
     main()

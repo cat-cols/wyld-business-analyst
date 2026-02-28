@@ -1,5 +1,6 @@
 -- sql/staging/stg_sku_distribution_status.sql
--- SKU x dispensary distribution/listing status (listed, active, discontinued, etc.)
+-- SKU distribution status by store/account (listed/not listed, active/inactive, discontinued, etc.)
+-- Raw source: raw.sku_distribution_status
 -- Output: stg.stg_sku_distribution_status (typed, normalized keys, flags)
 
 create schema if not exists stg;
@@ -7,29 +8,31 @@ create schema if not exists stg;
 create or replace view stg.stg_sku_distribution_status as
 with base as (
     select
+        -- lineage
         load_id,
         source_system,
         cadence,
         drop_date,
         ingested_at,
 
-        dispensary_id_raw,
-        dispensary_id_norm,
+        -- snapshot date
+        as_of_date,
+        as_of_date_raw,
 
+        -- keys
+        store_code_raw,
+        store_code_norm,
         sku_raw,
         sku_norm,
 
+        -- status attrs
         distribution_status_raw,
         distribution_status_norm,
-
-        first_listed_date_raw,
-        first_listed_date,
-
-        last_sold_date_raw,
-        last_sold_date
+        status_reason_raw,
+        status_reason_norm
     from raw.sku_distribution_status
 ),
-clean as (
+casted as (
     select
         load_id,
         source_system,
@@ -37,63 +40,42 @@ clean as (
         drop_date,
         ingested_at,
 
-        nullif(trim(dispensary_id_norm), '') as dispensary_id,
-        dispensary_id_raw,
+        coalesce(
+            as_of_date,
+            case
+                when as_of_date_raw ~ '^\d{4}-\d{2}-\d{2}$' then as_of_date_raw::date
+                when as_of_date_raw ~ '^\d{2}/\d{2}/\d{4}$' then to_date(as_of_date_raw, 'MM/DD/YYYY')
+                else null
+            end
+        ) as as_of_date,
+        as_of_date_raw,
+
+        nullif(trim(store_code_norm), '') as store_code,
+        store_code_raw,
 
         nullif(trim(sku_norm), '') as sku,
         sku_raw,
 
-        distribution_status_raw,
+        -- canonical bucket (prefer *_norm, fall back to *_raw)
         case
-            when distribution_status_norm is null then null
-            when lower(trim(distribution_status_norm)) in ('listed','active','available','enabled','in distribution') then 'active'
-            when lower(trim(distribution_status_norm)) in ('not listed','unlisted','inactive','disabled') then 'inactive'
-            when lower(trim(distribution_status_norm)) in ('discontinued','delisted','retired') then 'discontinued'
-            when lower(trim(distribution_status_norm)) in ('out of stock','oos') then 'oos'
-            else nullif(lower(trim(distribution_status_norm)), '')
+            when coalesce(distribution_status_norm, distribution_status_raw) is null then null
+            else nullif(lower(trim(coalesce(distribution_status_norm, distribution_status_raw))), '')
         end as distribution_status,
+        distribution_status_raw,
 
-        /* derived booleans */
-        case
-            when lower(trim(distribution_status_norm)) in ('listed','active','available','enabled','in distribution') then true
-            when lower(trim(distribution_status_norm)) in ('not listed','unlisted','inactive','disabled','discontinued','delisted','retired') then false
-            else null
-        end as is_listed,
-
-        coalesce(
-            first_listed_date,
-            case
-                when first_listed_date_raw ~ '^\d{4}-\d{2}-\d{2}$' then first_listed_date_raw::date
-                when first_listed_date_raw ~ '^\d{2}/\d{2}/\d{4}$' then to_date(first_listed_date_raw, 'MM/DD/YYYY')
-                else null
-            end
-        ) as first_listed_date,
-        first_listed_date_raw,
-
-        coalesce(
-            last_sold_date,
-            case
-                when last_sold_date_raw ~ '^\d{4}-\d{2}-\d{2}$' then last_sold_date_raw::date
-                when last_sold_date_raw ~ '^\d{2}/\d{2}/\d{4}$' then to_date(last_sold_date_raw, 'MM/DD/YYYY')
-                else null
-            end
-        ) as last_sold_date,
-        last_sold_date_raw
+        nullif(trim(coalesce(status_reason_norm, status_reason_raw)), '') as status_reason,
+        status_reason_raw
     from base
 ),
 flags as (
     select
         *,
-
-        (dispensary_id is null or sku is null) as is_missing_key,
-
-        (distribution_status is null) as is_unmapped_status,
-
+        (as_of_date is null or store_code is null or sku is null or distribution_status is null) as is_missing_key,
         (
-            first_listed_date is not null
-            and last_sold_date is not null
-            and last_sold_date < first_listed_date
-        ) as is_bad_date_range
-    from clean
+            count(*) over (
+                partition by load_id, as_of_date, store_code, sku, distribution_status
+            ) > 1
+        ) as is_duplicate_candidate
+    from casted
 )
 select * from flags;

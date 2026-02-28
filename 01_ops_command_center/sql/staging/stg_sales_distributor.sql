@@ -1,12 +1,13 @@
--- Standardize distributor sales extract
-SELECT * FROM raw_sales_distributor_extract;
-
 -- stg_sales_distributor.sql
 -- Standardize distributor daily sales extracts into a boring, typed, joinable staging view.
 
 -- dbt:
 -- create schema if not exists stg;
 
+-- debug view: SELECT * FROM sales_distributor_extract;
+
+
+--
 create or replace view stg.stg_sales_distributor as
 with base as (
     select
@@ -54,7 +55,7 @@ with base as (
         orders_raw,
         customers,
         customers_raw
-    from raw.project1_sales_distributor
+    from raw.sales_distributor_extract
 ),
 casted as (
     select

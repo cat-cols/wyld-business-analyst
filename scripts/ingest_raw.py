@@ -12,6 +12,8 @@ Loads:
 - people.payroll current XLSX   -> raw.labor_hours_payroll_export
 - finance.erp_finance XLSX      -> raw.finance_actuals_summary
 - finance.gl current CSV        -> raw.gl_detail_csv
+-                               -> raw.account_status
+-                               -> raw.dispensary_master
 
 Also: does NOT replace the simulator’s DB-load tables (raw.project1_pos_transactions/raw.project1_gl_detail),
 but you’ll now have “file ingests” in raw too, which is realistic.
