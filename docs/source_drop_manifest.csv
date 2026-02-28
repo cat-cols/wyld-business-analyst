@@ -1,0 +1,90 @@
+domain,system,cadence,drop_date,file_type,relative_path,target,row_count,notes,load_id
+sales,distributor,daily,2025-01-01,csv,data/source_extracts/sales/distributor/incoming/2025/01/01/sales_distributor_extract.csv,,1277,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-01,csv,data/source_extracts/sales/pos/incoming/2025/01/01/pos_transactions.csv,,685,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-01,postgres,,raw.project1_pos_transactions,685,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-01,csv,data/source_extracts/ops/erp/incoming/2025/01/01/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-01,csv,data/source_extracts/ops/wms/incoming/2025/01/01/wms_shipments.csv,,131,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-01,csv,data/source_extracts/people/timeclock/incoming/2025/01/01/timeclock_punches.csv,,233,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-02,csv,data/source_extracts/sales/distributor/incoming/2025/01/02/sales_distributor_extract.csv,,1289,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-02,csv,data/source_extracts/sales/pos/incoming/2025/01/02/pos_transactions.csv,,654,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-02,postgres,,raw.project1_pos_transactions,654,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-02,csv,data/source_extracts/ops/erp/incoming/2025/01/02/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-02,csv,data/source_extracts/ops/wms/incoming/2025/01/02/wms_shipments.csv,,120,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-02,csv,data/source_extracts/people/timeclock/incoming/2025/01/02/timeclock_punches.csv,,214,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-03,csv,data/source_extracts/sales/distributor/incoming/2025/01/03/sales_distributor_extract.csv,,1283,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-03,csv,data/source_extracts/sales/pos/incoming/2025/01/03/pos_transactions.csv,,664,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-03,postgres,,raw.project1_pos_transactions,664,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-03,csv,data/source_extracts/ops/erp/incoming/2025/01/03/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-03,csv,data/source_extracts/ops/wms/incoming/2025/01/03/wms_shipments.csv,,106,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-03,csv,data/source_extracts/people/timeclock/incoming/2025/01/03/timeclock_punches.csv,,240,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-04,csv,data/source_extracts/sales/distributor/incoming/2025/01/04/sales_distributor_extract.csv,,1199,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-04,csv,data/source_extracts/sales/pos/incoming/2025/01/04/pos_transactions.csv,,709,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-04,postgres,,raw.project1_pos_transactions,709,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-04,csv,data/source_extracts/ops/erp/incoming/2025/01/04/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-04,csv,data/source_extracts/ops/wms/incoming/2025/01/04/wms_shipments.csv,,120,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-04,csv,data/source_extracts/people/timeclock/incoming/2025/01/04/timeclock_punches.csv,,255,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-05,csv,data/source_extracts/sales/distributor/incoming/2025/01/05/sales_distributor_extract.csv,,1138,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-05,csv,data/source_extracts/sales/pos/incoming/2025/01/05/pos_transactions.csv,,789,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-05,postgres,,raw.project1_pos_transactions,789,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-05,csv,data/source_extracts/ops/erp/incoming/2025/01/05/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-05,csv,data/source_extracts/ops/wms/incoming/2025/01/05/wms_shipments.csv,,122,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-05,csv,data/source_extracts/people/timeclock/incoming/2025/01/05/timeclock_punches.csv,,242,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-06,csv,data/source_extracts/sales/distributor/incoming/2025/01/06/sales_distributor_extract.csv,,1266,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-06,csv,data/source_extracts/sales/pos/incoming/2025/01/06/pos_transactions.csv,,664,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-06,postgres,,raw.project1_pos_transactions,664,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-06,csv,data/source_extracts/ops/erp/incoming/2025/01/06/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-06,csv,data/source_extracts/ops/wms/incoming/2025/01/06/wms_shipments.csv,,139,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-06,csv,data/source_extracts/people/timeclock/incoming/2025/01/06/timeclock_punches.csv,,222,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-07,csv,data/source_extracts/sales/distributor/incoming/2025/01/07/sales_distributor_extract.csv,,1256,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-07,csv,data/source_extracts/sales/pos/incoming/2025/01/07/pos_transactions.csv,,767,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-07,postgres,,raw.project1_pos_transactions,767,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-07,csv,data/source_extracts/ops/erp/incoming/2025/01/07/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-07,csv,data/source_extracts/ops/wms/incoming/2025/01/07/wms_shipments.csv,,113,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-07,csv,data/source_extracts/people/timeclock/incoming/2025/01/07/timeclock_punches.csv,,247,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-08,csv,data/source_extracts/sales/distributor/incoming/2025/01/08/sales_distributor_extract.csv,,1302,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-08,csv,data/source_extracts/sales/pos/incoming/2025/01/08/pos_transactions.csv,,727,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-08,postgres,,raw.project1_pos_transactions,727,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-08,csv,data/source_extracts/ops/erp/incoming/2025/01/08/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-08,csv,data/source_extracts/ops/wms/incoming/2025/01/08/wms_shipments.csv,,130,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-08,csv,data/source_extracts/people/timeclock/incoming/2025/01/08/timeclock_punches.csv,,247,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-09,csv,data/source_extracts/sales/distributor/incoming/2025/01/09/sales_distributor_extract.csv,,1245,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-09,csv,data/source_extracts/sales/pos/incoming/2025/01/09/pos_transactions.csv,,625,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-09,postgres,,raw.project1_pos_transactions,625,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-09,csv,data/source_extracts/ops/erp/incoming/2025/01/09/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-09,csv,data/source_extracts/ops/wms/incoming/2025/01/09/wms_shipments.csv,,109,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-09,csv,data/source_extracts/people/timeclock/incoming/2025/01/09/timeclock_punches.csv,,227,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-10,csv,data/source_extracts/sales/distributor/incoming/2025/01/10/sales_distributor_extract.csv,,1239,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-10,csv,data/source_extracts/sales/pos/incoming/2025/01/10/pos_transactions.csv,,879,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-10,postgres,,raw.project1_pos_transactions,879,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-10,csv,data/source_extracts/ops/erp/incoming/2025/01/10/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-10,csv,data/source_extracts/ops/wms/incoming/2025/01/10/wms_shipments.csv,,120,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-10,csv,data/source_extracts/people/timeclock/incoming/2025/01/10/timeclock_punches.csv,,286,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-11,csv,data/source_extracts/sales/distributor/incoming/2025/01/11/sales_distributor_extract.csv,,1176,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-11,csv,data/source_extracts/sales/pos/incoming/2025/01/11/pos_transactions.csv,,723,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-11,postgres,,raw.project1_pos_transactions,723,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-11,csv,data/source_extracts/ops/erp/incoming/2025/01/11/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-11,csv,data/source_extracts/ops/wms/incoming/2025/01/11/wms_shipments.csv,,103,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-11,csv,data/source_extracts/people/timeclock/incoming/2025/01/11/timeclock_punches.csv,,212,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-12,csv,data/source_extracts/sales/distributor/incoming/2025/01/12/sales_distributor_extract.csv,,1125,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-12,csv,data/source_extracts/sales/pos/incoming/2025/01/12/pos_transactions.csv,,606,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-12,postgres,,raw.project1_pos_transactions,606,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-12,csv,data/source_extracts/ops/erp/incoming/2025/01/12/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-12,csv,data/source_extracts/ops/wms/incoming/2025/01/12/wms_shipments.csv,,120,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-12,csv,data/source_extracts/people/timeclock/incoming/2025/01/12/timeclock_punches.csv,,202,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-13,csv,data/source_extracts/sales/distributor/incoming/2025/01/13/sales_distributor_extract.csv,,1268,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-13,csv,data/source_extracts/sales/pos/incoming/2025/01/13/pos_transactions.csv,,812,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-13,postgres,,raw.project1_pos_transactions,812,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-13,csv,data/source_extracts/ops/erp/incoming/2025/01/13/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-13,csv,data/source_extracts/ops/wms/incoming/2025/01/13/wms_shipments.csv,,109,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-13,csv,data/source_extracts/people/timeclock/incoming/2025/01/13/timeclock_punches.csv,,240,missing OUT punches; mixed timestamp formats,a898377b5a1e
+sales,distributor,daily,2025-01-14,csv,data/source_extracts/sales/distributor/incoming/2025/01/14/sales_distributor_extract.csv,,1251,"duplicates, missing Store ID, channel casing/whitespace, date format mix",a898377b5a1e
+sales,pos,daily,2025-01-14,csv,data/source_extracts/sales/pos/incoming/2025/01/14/pos_transactions.csv,,707,row-level POS; some bad datetime formats,a898377b5a1e
+sales,pos,daily,2025-01-14,postgres,,raw.project1_pos_transactions,707,loaded to postgres,a898377b5a1e
+ops,erp,daily,2025-01-14,csv,data/source_extracts/ops/erp/incoming/2025/01/14/inventory_erp_snapshot.csv,,600,negative On Hand exceptions; site code drift,a898377b5a1e
+ops,wms,daily,2025-01-14,csv,data/source_extracts/ops/wms/incoming/2025/01/14/wms_shipments.csv,,107,duplicates; occasional missing sku,a898377b5a1e
+people,timeclock,daily,2025-01-14,csv,data/source_extracts/people/timeclock/incoming/2025/01/14/timeclock_punches.csv,,244,missing OUT punches; mixed timestamp formats,a898377b5a1e
+people,payroll,weekly,2025-01-05,xlsx,data/source_extracts/people/payroll/incoming/2025/01/05/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,a898377b5a1e
+people,payroll,weekly,2025-01-12,xlsx,data/source_extracts/people/payroll/incoming/2025/01/12/labor_hours_payroll_export.xlsx,,320,team spelling variation; zero-hour rows with cost,a898377b5a1e
+finance,erp_finance,monthly,2025-01-01,xlsx,data/source_extracts/finance/erp_finance/incoming/2025/01/01/finance_actuals_summary.xlsx,,5,metric label variance; small drift,a898377b5a1e
+finance,gl,monthly,2025-01-01,csv,data/source_extracts/finance/gl/incoming/2025/01/01/gl_detail.csv,,897,GL detail extract; missing location; account code drift,a898377b5a1e
+finance,gl,monthly,2025-01-01,postgres,,raw.project1_gl_detail,897,loaded to postgres,a898377b5a1e

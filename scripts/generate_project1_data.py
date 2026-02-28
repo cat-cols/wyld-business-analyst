@@ -590,6 +590,9 @@ def gen_gl_detail_month(cfg: Config, rng: np.random.Generator, month_start: pd.T
 # Postgres helpers
 # -----------------------------
 
+def pg_drop_table(con, schema: str, table: str) -> None:
+    pg_exec(con, f"drop table if exists {_pg_ident(schema)}.{_pg_ident(table)};")
+
 def _try_import_psycopg():
     """
     Returns (module, kind) where kind is "psycopg" or "psycopg2".
@@ -1285,21 +1288,27 @@ def main() -> None:
     ap.add_argument("--pg-schema", default=os.getenv("PROJECT1_PG_SCHEMA", "raw"), help="Target schema (default: raw)")
 
     ap.add_argument(
+        "--pg-ddl-mode",
+        choices=["keep", "drop_and_create"],
+        default=os.getenv("PROJECT1_PG_DDL_MODE", "keep"),
+        help="Whether to keep existing raw tables or drop+recreate them to match the stable DDL",
+    )
+
+    ap.add_argument(
         "--pg-load-mode",
         choices=["append", "truncate_then_append"],
         default=os.getenv("PROJECT1_PG_LOAD_MODE", "append"),
         help="How to load each run into the target tables",
     )
-
-    # Allow overriding table names via env/args, but default to the canonical list
-    ap.add_argument("--t-sales-distributor", default=os.getenv("PROJECT1_T_SALES_DISTRIBUTOR", "project1_sales_distributor"))
-    ap.add_argument("--t-pos", default=os.getenv("PROJECT1_T_POS", "project1_pos_transactions"))
-    ap.add_argument("--t-inventory", default=os.getenv("PROJECT1_T_INVENTORY", "project1_inventory_snapshot"))
-    ap.add_argument("--t-wms", default=os.getenv("PROJECT1_T_WMS", "project1_wms_shipments"))
-    ap.add_argument("--t-timeclock", default=os.getenv("PROJECT1_T_TIMECLOCK", "project1_timeclock_punches"))
-    ap.add_argument("--t-payroll", default=os.getenv("PROJECT1_T_PAYROLL", "project1_payroll_weekly"))
-    ap.add_argument("--t-finance-actuals", default=os.getenv("PROJECT1_T_FIN_ACTUALS", "project1_finance_actuals"))
-    ap.add_argument("--t-gl", default=os.getenv("PROJECT1_T_GL", "project1_gl_detail"))
+    # Default raw table names (aligned to your existing raw schema naming)
+    ap.add_argument("--t-sales-distributor", default=os.getenv("PROJECT1_T_SALES_DISTRIBUTOR", "sales_distributor_extract"))
+    ap.add_argument("--t-pos",              default=os.getenv("PROJECT1_T_POS",              "pos_transactions_csv"))
+    ap.add_argument("--t-inventory",        default=os.getenv("PROJECT1_T_INVENTORY",        "inventory_erp_snapshot"))
+    ap.add_argument("--t-wms",              default=os.getenv("PROJECT1_T_WMS",              "wms_shipments"))
+    ap.add_argument("--t-timeclock",        default=os.getenv("PROJECT1_T_TIMECLOCK",        "timeclock_punches"))
+    ap.add_argument("--t-payroll",          default=os.getenv("PROJECT1_T_PAYROLL",          "labor_hours_payroll_export"))
+    ap.add_argument("--t-finance-actuals",  default=os.getenv("PROJECT1_T_FIN_ACTUALS",      "finance_actuals_summary"))
+    ap.add_argument("--t-gl",               default=os.getenv("PROJECT1_T_GL",               "gl_detail_csv"))
 
     args = ap.parse_args()
 
@@ -1352,6 +1361,8 @@ def main() -> None:
         args.t_gl: "project1_gl_detail",
     }
     for actual_name, canonical in canonical_map.items():
+        if args.pg_ddl_mode == "drop_and_create":
+            pg_drop_table(con, args.pg_schema, actual_name)
         pg_ensure_table(con, args.pg_schema, actual_name, DDL_TABLES[canonical])
 
     if args.pg_load_mode == "truncate_then_append":
