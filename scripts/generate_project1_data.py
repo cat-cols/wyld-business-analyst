@@ -25,14 +25,14 @@ Monthly
 - Finance / Actuals summary XLSX
 
 Postgres raw loads (all sources):
-- raw.project1_sales_distributor
-- raw.project1_pos_transactions
-- raw.project1_inventory_snapshot
-- raw.project1_wms_shipments
-- raw.project1_timeclock_punches
-- raw.project1_payroll_weekly
-- raw.project1_finance_actuals
-- raw.project1_gl_detail
+- raw.sales_distributor
+- raw.pos_transactions
+- raw.inventory_erp_snapshot
+- raw.wms_shipments
+- raw.timeclock_punches
+- raw.payroll_weekly
+- raw.finance_actuals_summary
+- raw.gl_detail_csv
 
 Writes drops under:
   data/source_extracts/<domain>/<system>/incoming/YYYY/MM/DD/<file>
@@ -2371,5 +2371,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
     main()

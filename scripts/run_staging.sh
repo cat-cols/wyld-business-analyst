@@ -85,8 +85,8 @@ SQL_DIR="${SQL_DIR_OVERRIDE:-$ROOT/$BASE_DIR/sql/staging}"
 
 # Prefer QA inside base/sql/staging/checks, then base/docs, then repo/docs
 QA_CANDIDATE_1="$ROOT/$BASE_DIR/sql/staging/checks/qa_checks.sql"
-QA_CANDIDATE_2="$ROOT/$BASE_DIR/docs/qa_phase2_checks.sql"
-QA_CANDIDATE_3="$ROOT/docs/qa_phase2_checks.sql"
+QA_CANDIDATE_2="$ROOT/$BASE_DIR/docs/qa_checks.sql"
+QA_CANDIDATE_3="$ROOT/docs/qa_checks.sql"
 
 if [[ -n "$QA_FILE_OVERRIDE" ]]; then
   QA_FILE="$QA_FILE_OVERRIDE"

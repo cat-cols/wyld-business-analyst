@@ -37,7 +37,7 @@ with base as (
 
         backordered_units,
         backordered_units_raw
-    from raw.project1_inventory_snapshot
+    from raw.inventory_erp_snapshot
 ),
 casted as (
     select

@@ -25,7 +25,7 @@ with base as (
 
         currency_code_norm,
         currency_code_raw
-    from raw.project1_finance_actuals
+    from raw.finance_actuals_summary
 ),
 casted as (
     select
