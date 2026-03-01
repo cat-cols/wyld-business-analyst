@@ -1,4 +1,14 @@
--- staging/qa_phase2_checks.sql
+-- 01_ops_command_center/sql/staging/checks/qa_checks.sql
+-- Phase 2 QA checks for raw + stg pipeline.
+--
+-- Goals:
+-- 1) Existence checks for required raw tables + stg views
+-- 2) Rowcount checks (must be > 0)
+-- 3) Light quality checks on common flag columns when present
+-- 4) Print results + persist a copy into qa.qa_results for later review
+-- 5) Hard-fail if any FAIL-severity checks fail
+
+-- old? vvv
 -- 1. Do row counts exist for each staging model?
 -- 2. What % of rows are flagged?
 -- 3. Are the keys usable (how many null keys)?
@@ -19,9 +29,27 @@
 \echo '=============================='
 \echo ''
 
+-- Persistent store (so you can query results after the session)
+create schema if not exists qa;
+
+drop table if exists qa.qa_results;
+
+create table qa.qa_results (
+  check_group text,
+  severity text,
+  status text,
+  check_name text,
+  metric numeric,
+  threshold numeric,
+  details text,
+  checked_at timestamp default now()
+);
+
 begin;
 
-drop table if exists qa_results;
+-- Temp working table for this run (dies on commit)
+drop table if exists pg_temp.qa_results;
+
 create temp table qa_results (
   check_group text not null,
   check_name  text not null,
@@ -84,8 +112,7 @@ begin
 end $$;
 
 -- ------------------------------------------------------------
--- 2) Helper: add WARN checks for common flag columns if present
---    (won’t error if a column doesn’t exist)
+-- 2) Quality checks for common flag columns if present
 -- ------------------------------------------------------------
 do $$
 declare
@@ -109,13 +136,12 @@ declare
   col_exists boolean;
 
   -- thresholds (tune later)
-  th_missing numeric := 0.10;  -- 10% missing keys -> warn
-  th_dups    numeric := 0.05;  -- 5% duplicates -> warn
-  th_bad_amt numeric := 0.03;  -- 3% bad amount -> warn
-  th_bad_state numeric := 0.01; -- 1% bad state -> warn
-  th_bad_postal numeric := 0.05; -- 5% bad postal -> warn
+  th_missing numeric := 0.10;   -- 10% missing keys -> WARN
+  th_dups    numeric := 0.05;   -- 5% duplicates -> WARN
+  th_bad_amt numeric := 0.03;   -- 3% bad amount -> WARN
+  th_bad_state numeric := 0.01; -- 1% bad state -> WARN
+  th_bad_postal numeric := 0.05;-- 5% bad postal -> WARN
 begin
-  -- list of stg views we want to quality-check
   for v_schema, v_name in
     select * from (values
       ('stg','stg_sales_distributor'),
@@ -222,7 +248,7 @@ begin
 end $$;
 
 -- ------------------------------------------------------------
--- 3) Report
+-- 3) Print results
 -- ------------------------------------------------------------
 \echo ''
 \echo '--- QA RESULTS ---'
@@ -253,7 +279,21 @@ group by severity
 order by (case severity when 'FAIL' then 1 when 'WARN' then 2 else 3 end);
 
 -- ------------------------------------------------------------
--- 4) Hard fail if any FAIL-severity checks failed
+-- 4) Persist a copy of this run into qa.qa_results
+-- ------------------------------------------------------------
+insert into qa.qa_results(check_group, severity, status, check_name, metric, threshold, details)
+select
+  check_group,
+  severity,
+  case when passed then 'PASS' else 'FAIL' end as status,
+  check_name,
+  metric,
+  threshold,
+  details
+from qa_results;
+
+-- ------------------------------------------------------------
+-- 5) Hard fail if any FAIL-severity checks failed
 -- ------------------------------------------------------------
 do $$
 declare
