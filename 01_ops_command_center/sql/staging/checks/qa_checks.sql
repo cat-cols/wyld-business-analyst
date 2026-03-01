@@ -83,6 +83,8 @@ begin
     'raw.account_status',
     'raw.dispensary_master',
     'raw.sku_distribution_status',
+    'stg.stg_pos_transactions',
+    'stg.stg_wms_shipments',
 
     -- staging views
     'stg.stg_sales_distributor',
