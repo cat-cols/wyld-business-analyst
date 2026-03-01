@@ -11,11 +11,15 @@
 - [ ] Add setup script option for `minimal` vs `full` environment install
 
 ## Project 1
+- [ ] lock in “one-command rebuild”
 - [ ] Update `generate_project1_data.py` to use the new product definition file
 - [ ] Update `generate_project1_data.py` to use the new location definition file
 - [ ] Update `generate_project1_data.py` to separate warehouse/retail locations into their own tables from locations table(where wyld sells to)
 - [ ] Should I separate the location generation into its own script?
 - [ ] Update `generate_project1_data.py` to use the new channel definition file / Should I separate the channel generation into its own script?
+- [ ] Make drop-and-create resilient to dependent views: Update `generate_project1_data.py` to not use
+        DROP TABLE ... CASCADE inside the generator (it can blow away staging unexpectedly),
+        `Instead:` your workflow should be “drop stg schema → rebuild raw tables → rebuild stg schema”.
 
 ## Portfolio Presentation
 - [ ] Finalize clean root README (what it is, what it proves, how to run)

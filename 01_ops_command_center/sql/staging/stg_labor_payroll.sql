@@ -38,7 +38,7 @@ with base as (
 
         labor_cost,
         labor_cost_raw
-    from raw.project1_payroll_weekly
+    from raw.labor_hours_payroll_export
 ),
 casted as (
     select

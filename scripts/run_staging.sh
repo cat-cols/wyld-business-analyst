@@ -3,12 +3,13 @@
 #
 # Runs Phase 2 staging SQL (non-dbt) in Postgres.
 # Defaults to staging SQL under: <repo>/01_ops_command_center/sql/staging
-# QA file default: <repo>/01_ops_command_center/docs/qa_checks.sql (fallback: <repo>/docs/qa_phase2_checks.sql)
 #
 # Usage:
 #   PROJECT1_PG_DSN="postgresql://user:pass@host:5432/db" ./scripts/run_staging.sh
-#   ./scripts/run_staging.sh --dsn "postgresql://user:pass@host:5432/db]"
+#   ./scripts/run_staging.sh --dsn "postgresql://user:pass@host:5432/db"
 #   ./scripts/run_staging.sh --base 01_ops_command_center
+#   ./scripts/run_staging.sh --reset-stg
+#   ./scripts/run_staging.sh --base 01_ops_command_center --reset-stg
 #   ./scripts/run_staging.sh --sql-dir "/abs/path/sql/staging" --qa-file "/abs/path/qa.sql"
 #   ./scripts/run_staging.sh --no-qa
 
@@ -16,6 +17,7 @@ set -euo pipefail
 
 DSN="${PROJECT1_PG_DSN:-}"
 RUN_QA=1
+RESET_STG=0
 BASE_DIR="${PROJECT1_BASE_DIR:-01_ops_command_center}"
 SQL_DIR_OVERRIDE=""
 QA_FILE_OVERRIDE=""
@@ -28,6 +30,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --no-qa)
       RUN_QA=0
+      shift
+      ;;
+    --reset-stg)
+      RESET_STG=1
       shift
       ;;
     --base)
@@ -47,17 +53,22 @@ while [[ $# -gt 0 ]]; do
 Usage:
   scripts/run_staging.sh [--dsn <POSTGRES_DSN>] [--no-qa]
                          [--base <subdir>] [--sql-dir <path>] [--qa-file <path>]
+                         [--reset-stg]
 
 Defaults:
   --base 01_ops_command_center
   SQL files: <repo>/<base>/sql/staging
-  QA file:   <repo>/<base>/docs/qa_phase2_checks.sql (fallback: <repo>/docs/qa_phase2_checks.sql)
+  QA file:   <repo>/<base>/sql/staging/checks/qa_checks.sql
+             (fallback: <repo>/<base>/docs/qa_phase2_checks.sql, then <repo>/docs/qa_phase2_checks.sql)
+
+Flags:
+  --reset-stg   Drops schema stg CASCADE before applying staging models.
 
 Examples:
   PROJECT1_PG_DSN="postgresql://..." ./scripts/run_staging.sh
   ./scripts/run_staging.sh --dsn "postgresql://..." --base 01_ops_command_center
-  ./scripts/run_staging.sh --sql-dir "/abs/path/sql/staging" --qa-file "/abs/path/qa.sql"
-  ./scripts/run_staging.sh --no-qa
+  ./scripts/run_staging.sh --reset-stg
+  ./scripts/run_staging.sh --base 01_ops_command_center --reset-stg --no-qa
 EOF
       exit 0
       ;;
@@ -80,7 +91,6 @@ if [[ -z "${DSN// }" ]]; then
 fi
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-
 SQL_DIR="${SQL_DIR_OVERRIDE:-$ROOT/$BASE_DIR/sql/staging}"
 
 # Prefer QA inside base/sql/staging/checks, then base/docs, then repo/docs
@@ -119,6 +129,12 @@ echo "   Root: $ROOT"
 echo "   SQL_DIR: $SQL_DIR"
 echo "   QA_FILE: $QA_FILE"
 echo
+
+if [[ "$RESET_STG" -eq 1 ]]; then
+  echo "==> Resetting schema stg (DROP CASCADE)"
+  psql "$DSN" -v ON_ERROR_STOP=1 -v VERBOSITY=terse -c "drop schema if exists stg cascade;"
+  echo
+fi
 
 echo "==> Ensuring schema stg exists"
 psql "$DSN" -v ON_ERROR_STOP=1 -v VERBOSITY=terse -c "create schema if not exists stg;"
