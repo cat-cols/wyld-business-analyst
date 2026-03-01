@@ -111,11 +111,13 @@ fi
 STAGING_FILES=(
   "$SQL_DIR/stg_sales_distributor.sql"
   "$SQL_DIR/stg_inventory_erp.sql"
+  "$SQL_DIR/stg_wms_shipments.sql"
   "$SQL_DIR/stg_labor_payroll.sql"
   "$SQL_DIR/stg_finance_actuals.sql"
   "$SQL_DIR/stg_account_status.sql"
   "$SQL_DIR/stg_dispensary_master.sql"
   "$SQL_DIR/stg_sku_distribution_status.sql"
+  "$SQL_DIR/stg_pos_transactions.sql"
 )
 
 psql_run() {
