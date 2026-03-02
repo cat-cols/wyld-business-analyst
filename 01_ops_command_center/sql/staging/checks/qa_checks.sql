@@ -8,7 +8,7 @@
 -- 4) Print results + persist a copy into qa.qa_results for later review
 -- 5) Hard-fail if any FAIL-severity checks fail
 
--- old? vvv
+-- old?
 -- 1. Do row counts exist for each staging model?
 -- 2. What % of rows are flagged?
 -- 3. Are the keys usable (how many null keys)?
@@ -83,8 +83,6 @@ begin
     'raw.account_status',
     'raw.dispensary_master',
     'raw.sku_distribution_status',
-    'stg.stg_pos_transactions',
-    'stg.stg_wms_shipments',
 
     -- staging views
     'stg.stg_sales_distributor',
@@ -93,7 +91,10 @@ begin
     'stg.stg_finance_actuals',
     'stg.stg_account_status',
     'stg.stg_dispensary_master',
-    'stg.stg_sku_distribution_status'
+    'stg.stg_sku_distribution_status',
+    'stg.stg_pos_transactions',
+    'stg.stg_wms_shipments',
+    'stg.stg_timeclock_punches'
   ];
 
   foreach obj in array req loop

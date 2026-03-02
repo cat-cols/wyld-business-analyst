@@ -118,6 +118,7 @@ STAGING_FILES=(
   "$SQL_DIR/stg_dispensary_master.sql"
   "$SQL_DIR/stg_sku_distribution_status.sql"
   "$SQL_DIR/stg_pos_transactions.sql"
+  "$SQL_DIR/stg_timeclock_punches.sql"
 )
 
 psql_run() {

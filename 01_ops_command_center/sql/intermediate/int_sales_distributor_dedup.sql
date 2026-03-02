@@ -1,67 +1,77 @@
 -- int/int_sales_distributor_dedup.sql
--- Dedup by collapsing duplicates at the natural grain:
---   sale_date + store + sku + channel
+-- Dedup at grain: sale_date + store_code + sku + channel
 
 create schema if not exists int;
 
 create or replace view int.int_sales_distributor_dedup as
 with base as (
-  select
-    sd.*
-  from stg.stg_sales_distributor sd
-  where
-    sd.sale_date is not null
-    and sd.store_id is not null
-    and sd.sku is not null
-    and sd.channel is not null
-    and coalesce(sd.is_missing_key, false) = false
+    select
+        s.*,
+        -- normalize naming for downstream consistency
+        s.store_id as store_code
+    from stg.stg_sales_distributor s
+    where
+        s.sale_date is not null
+        and s.store_id is not null
+        and s.sku is not null
+        and s.channel is not null
 ),
-agg as (
-  select
+ranked as (
+    select
+        b.*,
+        count(*) over (
+            partition by b.sale_date, b.store_code, b.sku, b.channel
+        ) as dup_group_size,
+        row_number() over (
+            partition by b.sale_date, b.store_code, b.sku, b.channel
+            order by
+                -- prefer “cleaner” rows first (false < true)
+                b.is_missing_key asc,
+                b.is_bad_amount asc,
+                b.ingested_at desc nulls last,
+                b.drop_date desc nulls last,
+                b.load_id desc nulls last
+        ) as rn
+    from base b
+)
+select
+    -- grain
     sale_date,
-    store_id as store_code,
+    store_code,
     sku,
     channel,
 
-    -- choose a stable label if present
-    max(product_name) as product_name,
+    -- measures / attributes
+    qty,
+    unit_list_price,
+    discount_rate,
+    unit_net_price,
+    gross_sales,
+    discount_amount,
+    net_sales,
+    cogs,
+    orders,
+    customers,
 
-    -- additive measures (safe to sum when duplicates exist)
-    sum(coalesce(qty, 0)) as qty,
-    sum(coalesce(gross_sales, 0)) as gross_sales,
-    sum(coalesce(discount_amount, 0)) as discount_amount,
-    sum(coalesce(net_sales, 0)) as net_sales,
-    sum(coalesce(cogs, 0)) as cogs,
-    sum(coalesce(orders, 0)) as orders,
-    sum(coalesce(customers, 0)) as customers,
+    -- keep some raw context if you like
+    sale_date_raw,
+    store_id_raw,
+    channel_raw,
+    qty_raw,
 
-    -- weighted unit prices (only where price+qty present)
-    case
-      when nullif(sum(qty) filter (where unit_list_price is not null and qty is not null), 0) is null then null
-      else
-        sum(unit_list_price * qty) filter (where unit_list_price is not null and qty is not null)
-        / nullif(sum(qty) filter (where unit_list_price is not null and qty is not null), 0)
-    end as unit_list_price_wavg,
+    -- flags
+    is_missing_key,
+    is_bad_amount,
 
-    case
-      when nullif(sum(qty) filter (where unit_net_price is not null and qty is not null), 0) is null then null
-      else
-        sum(unit_net_price * qty) filter (where unit_net_price is not null and qty is not null)
-        / nullif(sum(qty) filter (where unit_net_price is not null and qty is not null), 0)
-    end as unit_net_price_wavg,
+    -- lineage
+    load_id,
+    source_system,
+    cadence,
+    drop_date,
+    ingested_at,
 
-    -- implied discount rate (more stable than averaging %s)
-    case
-      when sum(coalesce(gross_sales, 0)) = 0 then null
-      else 1 - (sum(coalesce(net_sales, 0)) / nullif(sum(coalesce(gross_sales, 0)), 0))
-    end as discount_rate_implied,
-
-    -- explainability
-    count(*) as n_source_rows,
-    count(*) filter (where coalesce(is_duplicate_candidate,false)) as n_dup_candidate_rows,
-    max(ingested_at) as max_ingested_at,
-    max(drop_date) as max_drop_date
-  from base
-  group by 1,2,3,4
-)
-select * from agg;
+    -- debugging helper
+    dup_group_size
+from ranked
+where rn = 1
+;

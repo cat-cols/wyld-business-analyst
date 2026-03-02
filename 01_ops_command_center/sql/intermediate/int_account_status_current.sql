@@ -1,39 +1,39 @@
--- int/int_account_status_current.sql
--- One “current” account status per store_code (latest status_date wins)
-
 create schema if not exists int;
 
 create or replace view int.int_account_status_current as
 with ranked as (
-  select
-    s.*,
-    row_number() over (
-      partition by s.store_code
-      order by
-        s.status_date desc nulls last,
-        (s.is_missing_key is false) desc,
-        (s.account_status is not null) desc,
-        (s.status_reason is not null) desc,
-        s.ingested_at desc nulls last,
-        s.drop_date desc nulls last,
-        s.load_id desc nulls last
-    ) as rn
-  from stg.stg_account_status s
-  where s.store_code is not null
+    select
+        a.*,
+        count(*) over (partition by a.store_code) as version_count,
+        row_number() over (
+            partition by a.store_code
+            order by
+                coalesce(a.status_date, a.drop_date) desc nulls last,
+                a.ingested_at desc nulls last,
+                a.drop_date desc nulls last,
+                a.load_id desc nulls last
+        ) as rn
+    from stg.stg_account_status a
+    where a.store_code is not null
 )
 select
-  store_code,
-  status_date,
-  account_status,
-  status_reason,
+    -- grain
+    store_code,
 
-  load_id,
-  drop_date,
-  ingested_at,
+    -- “current” status fields
+    status_date,
+    account_status,
+    status_reason,
 
-  is_missing_key,
-  is_duplicate_candidate,
+    -- lineage
+    load_id,
+    source_system,
+    cadence,
+    drop_date,
+    ingested_at,
 
-  rn as selected_rank
+    -- debugging helper
+    version_count
 from ranked
-where rn = 1;
+where rn = 1
+;
