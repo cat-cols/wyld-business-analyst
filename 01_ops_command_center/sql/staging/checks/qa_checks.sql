@@ -32,9 +32,7 @@
 -- Persistent store (so you can query results after the session)
 create schema if not exists qa;
 
-drop table if exists qa.qa_results;
-
-create table qa.qa_results (
+create table if not exists qa.qa_results (
   check_group text,
   severity text,
   status text,
@@ -145,17 +143,20 @@ declare
   th_bad_state numeric := 0.01; -- 1% bad state -> WARN
   th_bad_postal numeric := 0.05;-- 5% bad postal -> WARN
 begin
-  for v_schema, v_name in
-    select * from (values
-      ('stg','stg_sales_distributor'),
-      ('stg','stg_inventory_erp'),
-      ('stg','stg_labor_payroll'),
-      ('stg','stg_finance_actuals'),
-      ('stg','stg_account_status'),
-      ('stg','stg_dispensary_master'),
-      ('stg','stg_sku_distribution_status')
-    ) as t(s, n)
-  loop
+for v_schema, v_name in
+  select * from (values
+    ('stg','stg_sales_distributor'),
+    ('stg','stg_inventory_erp'),
+    ('stg','stg_labor_payroll'),
+    ('stg','stg_finance_actuals'),
+    ('stg','stg_account_status'),
+    ('stg','stg_dispensary_master'),
+    ('stg','stg_sku_distribution_status'),
+    ('stg','stg_pos_transactions'),
+    ('stg','stg_wms_shipments'),
+    ('stg','stg_timeclock_punches')
+  ) as t(s, n)
+loop
     fq := format('%I.%I', v_schema, v_name);
 
     if to_regclass(fq) is null then
