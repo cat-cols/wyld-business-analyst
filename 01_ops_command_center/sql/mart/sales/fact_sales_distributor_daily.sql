@@ -1,4 +1,4 @@
--- mart/fact_sales_distributor_daily.sql
+-- 01_ops_command_center/sql/mart/sales/fact_sales_distributor_daily.sql
 -- grain: 1 row per sale_date + store_code + sku + channel
 -- Source of truth: int.int_sales_distributor_dedup (duplicates already collapsed)
 

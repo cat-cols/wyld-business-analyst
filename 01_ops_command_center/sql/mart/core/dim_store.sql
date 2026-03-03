@@ -1,4 +1,4 @@
--- mart.dim_store
+-- 01_ops_command_center/sql/mart/core/dim_store.sql
 -- mart.dim_store = `int.int_dispensary_latest` + `int.int_account_status_current`
 -- Grain: 1 row per store_code (conformed store dimension)
 
