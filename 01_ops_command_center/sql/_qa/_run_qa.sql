@@ -19,6 +19,7 @@
 
 \echo '--- QA: MART ---'
 \ir mart/qa_mart.sql
+\ir mart/qa_mart_dims.sql
 
 \echo ''
 \echo '--- QA: RECON ---'
