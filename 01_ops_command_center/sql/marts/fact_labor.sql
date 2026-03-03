@@ -1,1 +1,0 @@
--- Build fact_labor (grain: date x location x employee_group)

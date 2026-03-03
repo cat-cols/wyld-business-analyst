@@ -1,4 +1,5 @@
 -- mart.dim_store
+-- mart.dim_store = `int.int_dispensary_latest` + `int.int_account_status_current`
 -- Grain: 1 row per store_code (conformed store dimension)
 
 create schema if not exists mart;
@@ -30,3 +31,4 @@ select
 from int.int_dispensary_latest d
 left join int.int_account_status_current a
   on a.store_code = d.store_code;
+
