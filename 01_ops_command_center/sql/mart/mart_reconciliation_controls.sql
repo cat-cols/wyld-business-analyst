@@ -1,1 +1,10 @@
 -- Build control table: source_total vs modeled_total with delta and pass/warn/fail
+-- * `check_name`
+-- * `check_date`
+-- * `domain`
+-- * `source_total`
+-- * `modeled_total`
+-- * `delta_amount`
+-- * `delta_pct`
+-- * `tolerance_pct`
+-- * `status` (Pass/Warning/Fail)
