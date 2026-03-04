@@ -1,81 +1,128 @@
--- mart/core/dim_sku.sql
--- Conformed SKU dimension built from int truth sources.
--- Grain: 1 row per sku
+-- mart/core/controls_freshness.sql
+-- Freshness control: how recently key upstream/mart datasets were ingested.
+--
+-- Output: 1 row per model with max_ingested_at/max_drop_date + age + status.
+-- Status rules (default):
+--   - daily-ish domains (sales/ops/hr): PASS <= 2 days, WARN <= 5 days, else FAIL
+--   - finance monthly: PASS <= 40 days, WARN <= 60 days, else FAIL
+--
+-- If you add/remove marts, update the UNION list in "sources".
 
 create schema if not exists mart;
 
-create or replace view mart.dim_sku as
-with sku_universe as (
-  select distinct sku
-  from int.int_sales_distributor_dedup
-  where sku is not null
+create or replace view mart.controls_freshness as
+with sources as (
 
-  union
-
-  select distinct sku
-  from int.int_sku_distribution_status_dedup
-  where sku is not null
-),
-sales_profile as (
+  -- SALES
   select
-    sku,
-    -- choose a stable label if present
-    max(product_name) filter (where product_name is not null) as product_name,
+      'mart.fact_sales_distributor_daily'::text as model_name
+    , 'sales'::text as domain
+    , max(max_ingested_at) as max_ingested_at
+    , max(max_drop_date)::date as max_drop_date
+  from mart.fact_sales_distributor_daily
 
-    min(sale_date) as first_sale_date,
-    max(sale_date) as last_sale_date,
+  union all
 
-    -- lineage from sales dedup (already aggregated there)
-    max(max_ingested_at) as sales_max_ingested_at,
-    max(max_drop_date)   as sales_max_drop_date
-  from int.int_sales_distributor_dedup
-  group by 1
-),
-dist_ranked as (
   select
-    d.*,
-    row_number() over (
-      partition by d.sku
-      order by
-        d.as_of_date desc nulls last,
-        d.max_ingested_at desc nulls last,
-        d.max_drop_date desc nulls last
-    ) as rn
-  from int.int_sku_distribution_status_dedup d
-),
-dist_current as (
-  select
-    sku,
-    as_of_date as distribution_as_of_date,
-    distribution_status as distribution_status_current,
-    status_reason as distribution_status_reason,
+      'mart.fact_sales_pos_daily'
+    , 'sales'
+    , max(max_ingested_at)
+    , max(max_drop_date)::date
+  from mart.fact_sales_pos_daily
 
-    max_ingested_at as dist_max_ingested_at,
-    max_drop_date   as dist_max_drop_date
-  from dist_ranked
-  where rn = 1
+  -- OPS
+  union all
+
+  select
+      'mart.fact_inventory_snapshot_daily'
+    , 'ops'
+    , max(ingested_at)
+    , max(drop_date)::date
+  from mart.fact_inventory_snapshot_daily
+
+  union all
+
+  select
+      'mart.fact_shipments_daily'
+    , 'ops'
+    , max(max_ingested_at)
+    , max(max_drop_date)::date
+  from mart.fact_shipments_daily
+
+  union all
+
+  select
+      'mart.fact_sku_distribution_status_daily'
+    , 'ops'
+    , max(ingested_at)
+    , max(drop_date)::date
+  from mart.fact_sku_distribution_status_daily
+
+  -- HR (labor fact doesn’t carry lineage columns; use INT as the freshness source)
+  union all
+
+  select
+      'int.int_labor_daily'
+    , 'hr'
+    , max(max_ingested_at)
+    , max(max_drop_date)::date
+  from int.int_labor_daily
+
+  union all
+
+  select
+      'int.int_timeclock_punches_latest'
+    , 'hr'
+    , max(ingested_at)
+    , max(drop_date)::date
+  from int.int_timeclock_punches_latest
+
+  -- FINANCE
+  union all
+
+  select
+      'mart.fact_actuals_monthly'
+    , 'finance'
+    , max(max_ingested_at)
+    , max(max_drop_date)::date
+  from mart.fact_actuals_monthly
+),
+scored as (
+  select
+      current_date as run_date
+    , s.model_name
+    , s.domain
+    , s.max_ingested_at
+    , s.max_drop_date
+    , greatest(
+        coalesce(s.max_ingested_at, timestamp '1900-01-01'),
+        coalesce(s.max_drop_date::timestamp, timestamp '1900-01-01')
+      ) as freshness_ts
+  from sources s
+),
+final as (
+  select
+      run_date
+    , model_name
+    , domain
+    , max_ingested_at
+    , max_drop_date
+    , freshness_ts
+    , extract(epoch from (current_timestamp - freshness_ts)) / 3600.0 as age_hours
+    , (current_date - freshness_ts::date) as age_days
+    , case
+        when freshness_ts = timestamp '1900-01-01' then 'FAIL'
+        when domain = 'finance' and freshness_ts >= (current_timestamp - interval '40 days') then 'PASS'
+        when domain = 'finance' and freshness_ts >= (current_timestamp - interval '60 days') then 'WARNING'
+        when domain <> 'finance' and freshness_ts >= (current_timestamp - interval '2 days') then 'PASS'
+        when domain <> 'finance' and freshness_ts >= (current_timestamp - interval '5 days') then 'WARNING'
+        else 'FAIL'
+      end as status
+  from scored
 )
-select
-  u.sku,
-
-  -- descriptive attributes
-  sp.product_name,
-
-  -- lifecycle
-  sp.first_sale_date,
-  sp.last_sale_date,
-
-  -- current distribution context
-  dc.distribution_status_current,
-  dc.distribution_status_reason,
-  dc.distribution_as_of_date,
-
-  -- lineage breadcrumbs (very useful later)
-  sp.sales_max_ingested_at,
-  sp.sales_max_drop_date,
-  dc.dist_max_ingested_at,
-  dc.dist_max_drop_date
-
-from sku_universe u
-left join sales_profile sp on sp.sku = u.sku
-left join dist_current  dc on dc.sku = u.sku;
+select *
+from final
+order by
+  case status when 'FAIL' then 1 when 'WARNING' then 2 else 3 end,
+  domain,
+  model_name;
