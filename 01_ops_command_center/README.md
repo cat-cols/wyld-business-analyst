@@ -854,5 +854,3 @@ Skills: Tableau, SQL, Data Modeling, Cannabis Analytics, Documentation
 4. **Save** the DAX cheat sheets for interview prep
 
 **The project framework is done. Now you need the visual deliverable (Tableau dashboard).**
-
-**Ready to keep building?** 🚀🔥

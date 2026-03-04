@@ -9,6 +9,7 @@
 - [ ] Add `requirements-forecasting` option to bash setup script
 - [ ] Add `requirements-dq` option to bash setup script
 - [ ] Add setup script option for `minimal` vs `full` environment install
+- [ ] Implement ripgrep?
 
 ## Project 1
 - [ ] lock in “one-command rebuild”

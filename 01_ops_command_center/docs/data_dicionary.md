@@ -1,9 +1,9 @@
 # Data Dictionary
 
-**Project:** 01_ops_command_center  
-**Domain:** Sales / Ops / Labor / Finance (Synthetic Business Analyst Portfolio Project)  
-**Owner:** Brandon Hardison  
-**Status:** Draft v1  
+**Project:** 01_ops_command_center
+**Domain:** Sales / Ops / Labor / Finance (Synthetic Business Analyst Portfolio Project)
+**Owner:** Brandon Hardison
+**Status:** Draft v1
 
 ---
 
