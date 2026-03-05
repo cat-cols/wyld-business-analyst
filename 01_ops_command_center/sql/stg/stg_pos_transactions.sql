@@ -1,4 +1,4 @@
--- sql/staging/stg_pos_transactions.sql
+-- sql/stg/stg_pos_transactions.sql
 -- POS transactions staging view (typed + normalized keys + basic QA flags)
 -- Raw source: raw.pos_transactions_csv
 -- Output: stg.stg_pos_transactions

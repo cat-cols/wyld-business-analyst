@@ -4,18 +4,18 @@
 create schema if not exists int;
 
 create or replace view int.int_sales_distributor_dedup as
+
 with base as (
-    select
-        s.*,
-        -- normalize naming for downstream consistency
-        s.store_id as store_code
-    from stg.stg_sales_distributor s
-    where
-        s.sale_date is not null
-        and s.store_id is not null
-        and s.sku is not null
-        and s.channel is not null
+  select
+    s.*
+  from stg.stg_sales_distributor s
+  where
+    s.sale_date is not null
+    and s.store_code is not null
+    and s.sku is not null
+    and s.channel is not null
 ),
+
 ranked as (
     select
         b.*,
@@ -55,6 +55,8 @@ select
 
     -- keep some raw context if you like
     sale_date_raw,
+
+    -- keep raw store_id for lineage/debugging
     store_id_raw,
     channel_raw,
     qty_raw,

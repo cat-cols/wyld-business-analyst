@@ -17,7 +17,7 @@ with ranked as (
             order by
                 (p.txn_ts_parsed is not null) desc,
                 (p.store_code is not null) desc,
-                (p.product_sku is not null) desc,
+                (p.sku is not null) desc,
                 p.ingested_at desc nulls last,
                 p.drop_date desc nulls last,
                 p.load_id desc nulls last
