@@ -38,8 +38,8 @@
 \echo ''
 \echo '--- INT: hr ---'
 \ir hr/int_timeclock_punches_latest.sql
-\ir hr/int_labor_daily.sql
 \ir hr/int_labor_daily_employee.sql
+\ir hr/int_labor_daily.sql
 
 -- ----------------------------
 -- 4) OPS
