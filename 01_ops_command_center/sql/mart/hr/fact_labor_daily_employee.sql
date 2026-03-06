@@ -10,12 +10,20 @@ select
   store_code,
   employee_id,
 
+  -- measures
   hours_worked,
-  n_punches,
+  minutes_worked,
 
-  -- lineage
+  -- activity / explainability
+  n_events as n_punches,
+  n_shift_pairs,
+  n_unpaired_in,
+  n_out_events,
+
+  -- lineage rollups
   min_ingested_at,
   max_ingested_at,
   min_drop_date,
   max_drop_date
+
 from int.int_labor_daily_employee;

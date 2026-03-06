@@ -27,7 +27,6 @@
 -- Optional controls (keep commented until verified correct):
 -- NOTE: core/controls_freshness.sql is currently incorrect in your repo (duplicates dim_sku)
 -- \ir core/controls_freshness.sql
-\ir core/controls_dim_join_coverage.sql
 
 -- ----------------------------
 -- 2) Facts (stable grains)
@@ -81,6 +80,7 @@
 \echo '--- MART: controls ---'
 \ir controls/controls_rowcounts_daily.sql
 \ir controls/controls_missing_dim_joins.sql
+\ir core/controls_dim_join_coverage.sql
 
 -- Optional: currently comment-only stub in your repo
 -- \ir controls/_mart_reconciliation_controls.sql

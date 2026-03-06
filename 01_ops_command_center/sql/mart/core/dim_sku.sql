@@ -25,9 +25,9 @@ sales_profile as (
     min(sale_date) as first_sale_date,
     max(sale_date) as last_sale_date,
 
-    -- lineage from sales dedup (already aggregated there)
-    max(max_ingested_at) as sales_max_ingested_at,
-    max(max_drop_date)   as sales_max_drop_date
+    -- lineage from sales dedup (computed here)
+    max(ingested_at) as sales_max_ingested_at, -- ✅🙂 OK: ingested_at exists
+    max(drop_date)   as sales_max_drop_date    -- ✅🙂 OK: drop_date exists
   from int.int_sales_distributor_dedup
   group by 1
 ),
@@ -38,8 +38,9 @@ dist_ranked as (
       partition by d.sku
       order by
         d.as_of_date desc nulls last,
-        d.max_ingested_at desc nulls last,
-        d.max_drop_date desc nulls last
+        d.ingested_at desc nulls last, -- ✅ FIX: use real lineage columns
+        d.drop_date desc nulls last,   -- ✅ FIX: use real lineage columns
+        d.load_id desc nulls last      -- ✅💡 optional tie-breaker for determinism
     ) as rn
   from int.int_sku_distribution_status_dedup d
 ),
@@ -50,8 +51,8 @@ dist_current as (
     distribution_status as distribution_status_current,
     status_reason as distribution_status_reason,
 
-    max_ingested_at as dist_max_ingested_at,
-    max_drop_date   as dist_max_drop_date
+    ingested_at as dist_max_ingested_at, -- ✅ FIX: selected row’s ingested_at
+    drop_date   as dist_max_drop_date    -- ✅ FIX: selected row’s drop_date
   from dist_ranked
   where rn = 1
 )
@@ -70,7 +71,7 @@ select
   dc.distribution_status_reason,
   dc.distribution_as_of_date,
 
-  -- lineage breadcrumbs (very useful later)
+  -- lineage breadcrumbs
   sp.sales_max_ingested_at,
   sp.sales_max_drop_date,
   dc.dist_max_ingested_at,
