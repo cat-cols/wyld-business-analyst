@@ -81,9 +81,7 @@
 \ir controls/controls_rowcounts_daily.sql
 \ir controls/controls_missing_dim_joins.sql
 \ir core/controls_dim_join_coverage.sql
-
--- Optional: currently comment-only stub in your repo
--- \ir controls/_mart_reconciliation_controls.sql
+\ir controls/_mart_reconciliation_controls.sql
 
 -- ----------------------------
 -- 5) Recon (trust but verify)

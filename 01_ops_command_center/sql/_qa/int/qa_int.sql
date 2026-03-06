@@ -51,15 +51,26 @@ begin
   if v > 0 then
     raise exception 'QA FAIL: int.int_sku_distribution_status_dedup has % duplicate rows at (as_of_date, store_code, sku)', v;
   end if;
-
-  -- punches latest uniqueness by punch key
+  -- punches latest uniqueness by punch key (event-based)
   select count(*) into v from (
     select
-      coalesce(punch_id::text, store_code || '|' || employee_id || '|' || clock_in_at::text) as punch_key
+      coalesce(
+        punch_id::text,
+        store_code || '|' || employee_id::text || '|' || punch_ts::text || '|' || action
+      ) as punch_key
     from int.int_timeclock_punches_latest
     group by 1
     having count(*) > 1
   ) t;
+
+  -- punches latest uniqueness by punch key (legacy - kept for reference)
+  -- select count(*) into v from (
+  --   select
+  --     coalesce(punch_id::text, store_code || '|' || employee_id || '|' || clock_in_at::text) as punch_key
+  --   from int.int_timeclock_punches_latest
+  --   group by 1
+  --   having count(*) > 1
+  -- ) t;
   if v > 0 then
     raise exception 'QA FAIL: int.int_timeclock_punches_latest has % duplicate punch_key values', v;
   end if;
@@ -122,6 +133,18 @@ begin
   if v > 0 then
     raise exception 'QA FAIL: int.int_labor_daily has % rows with null keys', v;
   end if;
+  -- missing-key checks for timeclock punches
+  select count(*) into v
+  from int.int_timeclock_punches_latest
+  where store_code is null
+     or employee_id is null
+     or punch_ts is null
+     or punch_date is null
+     or action is null;
+
+  if v > 0 then
+    raise exception 'QA FAIL: int.int_timeclock_punches_latest has % rows with null keys', v;
+  end if;
 end $$;
 
 -- -----------------------
@@ -144,47 +167,45 @@ begin
     raise exception 'QA FAIL: int.int_sales_distributor_dedup has % rows with negative qty/sales/cogs', v;
   end if;
 
-  -- discount rate implied outside [0,1] (when present)
+  -- discount rate implied outside [0,1] (derived from amounts)
   select count(*) into v
   from int.int_sales_distributor_dedup
-  where discount_rate_implied is not null
-    and (discount_rate_implied < 0 or discount_rate_implied > 1);
+  where gross_sales is not null
+    and gross_sales > 0
+    and discount_amount is not null
+    and (
+      (discount_amount / gross_sales) < 0
+      or (discount_amount / gross_sales) > 1.0
+    );
 
   if v > 0 then
-    raise exception 'QA FAIL: int.int_sales_distributor_dedup has % rows with discount_rate_implied outside [0,1]', v;
+    raise exception 'QA FAIL: int.int_sales_distributor_dedup has % rows with implied discount rate outside [0,1]', v;
   end if;
 
-  -- punches minutes sanity (<= 24 hours)
+  -- employee-day minutes sanity (<= 24 hours)
   select count(*) into v
-  from int.int_timeclock_punches_latest
+  from int.int_labor_daily_employee
   where minutes_worked is not null
     and (minutes_worked < 0 or minutes_worked > 24*60);
 
   if v > 0 then
-    raise exception 'QA FAIL: int.int_timeclock_punches_latest has % rows with minutes_worked outside [0,1440]', v;
+    raise exception 'QA FAIL: int.int_labor_daily_employee has % rows with minutes_worked outside [0,1440]', v;
   end if;
 
-  -- labor daily sanity
+  -- labor daily sanity (event-based)
   select count(*) into v
   from int.int_labor_daily
   where hours_worked < 0
-     or n_punches < 0
-     or n_employees < 0
-     or n_punches < n_employees
-     or (n_employees > 0 and hours_worked > (24.5 * n_employees));  -- loose upper bound
+    or minutes_worked < 0
+    or n_events < 0
+    or n_shift_pairs < 0
+    or n_employees < 0
+    or n_unpaired_in < 0
+    or n_out_events < 0
+    or (n_employees > 0 and hours_worked > (24.5 * n_employees));  -- loose upper bound
 
   if v > 0 then
-    raise exception 'QA FAIL: int.int_labor_daily has % rows with impossible labor metrics (negatives / punches < employees / hours too high)', v;
-  end if;
-
-  -- lineage min/max sanity (if present)
-  select count(*) into v
-  from int.int_labor_daily
-  where (min_ingested_at is not null and max_ingested_at is not null and min_ingested_at > max_ingested_at)
-     or (min_drop_date   is not null and max_drop_date   is not null and min_drop_date   > max_drop_date);
-
-  if v > 0 then
-    raise exception 'QA FAIL: int.int_labor_daily has % rows where lineage min > max', v;
+    raise exception 'QA FAIL: int.int_labor_daily has % rows with impossible labor metrics (negatives / hours too high)', v;
   end if;
 
 end $$;
