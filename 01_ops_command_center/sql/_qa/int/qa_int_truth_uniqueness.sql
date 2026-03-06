@@ -63,7 +63,10 @@ begin
   -- 4b) natural punch key duplicates (covers NULL punch_id rows)
   select count(*) into v from (
     select
-      coalesce(punch_id::text, store_code || '|' || employee_id || '|' || clock_in_at::text) as punch_key
+      coalesce(
+        punch_id::text,
+        store_code || '|' || employee_id::text || '|' || punch_ts::text || '|' || action
+      ) as punch_key
     from int.int_timeclock_punches_latest
     group by 1
     having count(*) > 1
