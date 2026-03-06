@@ -73,7 +73,9 @@ select
     ingested_at,
 
     -- debugging helper
-    dup_group_size
+    dup_group_size,
+    product_name,
+    product_name_raw
 from ranked
 where rn = 1
 ;
