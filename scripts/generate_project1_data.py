@@ -138,10 +138,11 @@ WYLD_PRODUCTS: list[dict[str, Any]] = [
 
 def make_stores(n: int) -> pd.DataFrame:
     states = ["OR", "WA", "CA", "CO", "AZ", "NV", "IL", "MI"]
+    # country = ["United States", "Canada"]
     rows = []
     for i in range(1, n + 1):
         st = states[(i - 1) % len(states)]
-        rows.append({"store_id": f"{st}{i:03d}", "store_name": f"{st} Account {i:03d}", "state": st})
+        rows.append({"store_id": f"{st}{i:03d}", "store_name": f"{st} Account {i:03d}", "state": st, "country": "US"})
     return pd.DataFrame(rows)
 
 
@@ -568,8 +569,12 @@ def gen_payroll_week(cfg: Config, rng: np.random.Generator, week_end: pd.Timesta
         }
     )
 
-
-def gen_finance_actuals_month(cfg: Config, rng: np.random.Generator, month_start: pd.Timestamp) -> pd.DataFrame:
+def gen_finance_actuals_month_from_truth(
+    rng: np.random.Generator,
+    month_start: pd.Timestamp,
+    sales_monthly: pd.DataFrame,
+    labor_monthly: pd.DataFrame,
+) -> pd.DataFrame:
     metric_labels = {
         "gross_sales": ["Gross Sales", "gross_sales", "GROSS_SALES"],
         "net_sales": ["Net Sales", "net_sales", "NET_SALES"],
@@ -578,30 +583,75 @@ def gen_finance_actuals_month(cfg: Config, rng: np.random.Generator, month_start
         "labor_cost": ["Labor Cost", "labor_cost"],
     }
 
-    base = {
-        "gross_sales": float(rng.uniform(250000, 900000)),
-        "net_sales": float(rng.uniform(220000, 820000)),
-        "cogs": float(rng.uniform(90000, 360000)),
-        "labor_cost": float(rng.uniform(55000, 180000)),
-    }
-    base["gross_margin"] = base["net_sales"] - base["cogs"]
+    sm = sales_monthly.loc[sales_monthly["period_month"] == month_start].copy()
+    lm = labor_monthly.loc[labor_monthly["period_month"] == month_start].copy()
 
-    rows: list[dict[str, Any]] = []
-    for k, v in base.items():
-        drift = float(rng.normal(0.0, 0.008))
-        if rng.random() < 0.20:
-            drift += float(rng.choice([-0.012, 0.013]))
+    gross_sales = float(sm["gross_sales"].sum())
+    net_sales = float(sm["net_sales"].sum())
+    cogs = float(sm["cogs"].sum())
+    labor_cost = float(lm["labor_cost"].sum()) if not lm.empty else 0.0
+
+    # apply small finance drift / close adjustments
+    def drift(v: float, std: float = 0.006, extra_prob: float = 0.15) -> float:
+        d = float(rng.normal(0.0, std))
+        if rng.random() < extra_prob:
+            d += float(rng.choice([-0.01, 0.01]))
+        return round(v * (1 + d), 2)
+
+    finance_base = {
+        "gross_sales": drift(gross_sales),
+        "net_sales": drift(net_sales),
+        "cogs": drift(cogs),
+        "labor_cost": drift(labor_cost),
+    }
+    finance_base["gross_margin"] = round(finance_base["net_sales"] - finance_base["cogs"], 2)
+
+    rows = []
+    for k, v in finance_base.items():
         rows.append(
             {
-                "month_start": month_start.date().isoformat(),
-                "metric_name": str(rng.choice(metric_labels[k])),
-                "actual_amount": round(v * (1 + drift), 2),
-                "currency_code": "USD",
+                "Month Start": month_start.date().isoformat(),
+                "Metric Name": str(rng.choice(metric_labels[k])),
+                "Actual Amount": v,
+                "Currency": "USD",
             }
         )
 
-    df = pd.DataFrame(rows)
-    return df.rename(columns={"month_start": "Month Start", "metric_name": "Metric Name", "actual_amount": "Actual Amount", "currency_code": "Currency"})
+    return pd.DataFrame(rows)
+
+# def gen_finance_actuals_month(cfg: Config, rng: np.random.Generator, month_start: pd.Timestamp) -> pd.DataFrame:
+#     metric_labels = {
+#         "gross_sales": ["Gross Sales", "gross_sales", "GROSS_SALES"],
+#         "net_sales": ["Net Sales", "net_sales", "NET_SALES"],
+#         "cogs": ["COGS", "cogs", "Cost of Goods"],
+#         "gross_margin": ["Gross Margin", "gross_margin"],
+#         "labor_cost": ["Labor Cost", "labor_cost"],
+#     }
+
+#     base = {
+#         "gross_sales": float(rng.uniform(250000, 900000)),
+#         "net_sales": float(rng.uniform(220000, 820000)),
+#         "cogs": float(rng.uniform(90000, 360000)),
+#         "labor_cost": float(rng.uniform(55000, 180000)),
+#     }
+#     base["gross_margin"] = base["net_sales"] - base["cogs"]
+
+#     rows: list[dict[str, Any]] = []
+#     for k, v in base.items():
+#         drift = float(rng.normal(0.0, 0.008))
+#         if rng.random() < 0.20:
+#             drift += float(rng.choice([-0.012, 0.013]))
+#         rows.append(
+#             {
+#                 "month_start": month_start.date().isoformat(),
+#                 "metric_name": str(rng.choice(metric_labels[k])),
+#                 "actual_amount": round(v * (1 + drift), 2),
+#                 "currency_code": "USD",
+#             }
+#         )
+
+#     df = pd.DataFrame(rows)
+#     return df.rename(columns={"month_start": "Month Start", "metric_name": "Metric Name", "actual_amount": "Actual Amount", "currency_code": "Currency"})
 
 
 def gen_gl_detail_month(cfg: Config, rng: np.random.Generator, month_start: pd.Timestamp, stores: pd.DataFrame) -> pd.DataFrame:
@@ -2295,7 +2345,15 @@ def main() -> None:
     # -------------------------
     for ms in month_range:
         # finance actuals xlsx
-        fin_mess = gen_finance_actuals_month(cfg, rng, ms)
+        # fin_mess = gen_finance_actuals_month(cfg, rng, ms)
+
+        # use truth data instead of generating new data
+        fin_mess = gen_finance_actuals_month_from_truth(
+            rng=rng,
+            month_start=ms,
+            sales_monthly=sales_monthly,
+            labor_monthly=labor_monthly,
+        )
         p_in = incoming_dir(root, "finance", "erp_finance", ms)
         p_cur = current_dir(root, "finance", "erp_finance")
         p_in.mkdir(parents=True, exist_ok=True)
