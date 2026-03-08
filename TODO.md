@@ -1,5 +1,16 @@
 # TODO
 
+## TOP PRIORITY
+- [ ] Add semantic model test queries to validation folder
+- [ ] refactor customers as entity types: wholesale, retail/direct?
+
+---
+
+## MEDIUM PRIORITY
+- [ ]
+
+---
+
 ## Repo Polish
 - [ ] Reduce repo bloat by moving large databases/assets to GitHub Releases
 - [ ] Reconcile duplicate definition files into one master definition file

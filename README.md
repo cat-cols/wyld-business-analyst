@@ -1,5 +1,25 @@
 # Wyld Style Business Analyst Portfolio
 
+
+![Project](https://img.shields.io/badge/flagship-Ops%20Command%20Center-4f46e5)
+![Build Status](https://img.shields.io/badge/build-core%20analytics%20layers%20built-16a34a)
+![Reporting Layer](https://img.shields.io/badge/reporting%20layer-in%20progress-f59e0b)
+
+**Status:** Core analytics build substantially complete
+**Strongest layers:** Staging, conformance, marts, QA, reconciliation
+**Current focus:** Semantic-model planning, validation documentation, and report-layer design
+
+> OR...
+
+![Project](https://img.shields.io/badge/flagship-Ops%20Command%20Center-4f46e5)
+![Phase](https://img.shields.io/badge/project%201-phase%205%2F6%20in%20progress-orange)
+![Build Status](https://img.shields.io/badge/build-core%20analytics%20layers%20built-16a34a)
+![Status](https://img.shields.io/badge/status-core%20build%20substantially%20complete-brightgreen)
+![Layer](https://img.shields.io/badge/focus-SQL%20%7C%20QA%20%7C%20reconciliation-blue)
+![Validation](https://img.shields.io/badge/validation-QA%20%2B%20reconciliation%20implemented-0ea5e9)
+![Reporting](https://img.shields.io/badge/semantic%20model-planned%20%2F%20in%20progress-lightgrey)
+![Reporting Layer](https://img.shields.io/badge/reporting%20layer-semantic%20model%20in%20progress-f59e0b)
+
 This repo is organized as a multi-project portfolio program.
 
 A portfolio repository that simulates a real Business Analyst / Analytics workflow:
