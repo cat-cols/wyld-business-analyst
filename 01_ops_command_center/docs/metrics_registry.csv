@@ -1,0 +1,36 @@
+metric_name,business_area,grain,base_object,status,owner,formula_summary,notes
+units_sold,Sales,row in fact_sales / daily rollups,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,sum of units sold,Core sales volume measure
+unit_list_price,Sales,row-level sales economics,defined in metric dictionary,defined_not_modeled,Brandon Hardison,effective pre-discount unit price after channel factor and noise,Documented as recommended new column
+discount_rate,Sales,row-level sales economics,defined in metric dictionary,defined_not_modeled,Brandon Hardison,discount proportion applied to effective unit list price,Documented as recommended new column
+unit_net_price,Sales,row-level sales economics,defined in metric dictionary,defined_not_modeled,Brandon Hardison,unit_list_price * (1 - discount_rate),Documented as recommended new column
+gross_sales_amount,Sales,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,units_sold * unit_list_price or modeled gross sales basis,Use for discount and margin analysis
+discount_amount,Sales,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,gross_sales_amount - net_sales_amount,Should never exceed gross sales
+net_sales_amount,Sales,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,gross_sales_amount * (1 - discount_rate) or summed net sales,Primary revenue metric
+cogs_amount,Profitability,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,net_sales_amount * effective cogs ratio,Synthetic COGS logic
+order_count,Sales,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,estimated number of orders represented by the row,Synthetic operational estimate
+customer_count,Sales,daily by date/store/sku/channel,mart.fact_sales_distributor_daily,modeled,Brandon Hardison,estimated customer count represented by the row,Synthetic estimate
+average_selling_price,Sales,reporting measure,dax / semantic model,planned,Brandon Hardison,net_sales_amount / units_sold,Reporting KPI
+average_discount_rate,Sales,reporting measure,dax / semantic model,planned,Brandon Hardison,discount_amount / gross_sales_amount,Weighted rate preferred
+gross_margin_dollars,Profitability,daily or monthly KPI,mart.kpi_gross_margin_daily,modeled,Brandon Hardison,net_sales_amount - cogs_amount,Core profitability KPI
+gross_margin_pct,Profitability,reporting measure,mart.kpi_gross_margin_daily or dax,modeled,Brandon Hardison,gross_margin_dollars / net_sales_amount,Use percent formatting
+revenue_per_order,Sales,reporting measure,dax / semantic model,planned,Brandon Hardison,net_sales_amount / order_count,Useful for order-efficiency views
+units_per_order,Sales,reporting measure,dax / semantic model,planned,Brandon Hardison,units_sold / order_count,Useful for basket-size context
+on_hand_units,Inventory,daily by snapshot/store/sku,mart.fact_inventory_snapshot_daily,modeled,Brandon Hardison,current units on hand at snapshot time,Core inventory position measure
+received_units,Inventory,daily by snapshot/store/sku,mart.fact_inventory_snapshot_daily,modeled,Brandon Hardison,units received into inventory,Supports inventory flow analysis
+shipped_units,Inventory,daily by ship date/store/sku,mart.fact_shipments_daily,modeled,Brandon Hardison,units shipped from WMS,Pair with demand and coverage analysis
+requested_units,Inventory,daily by snapshot/store/sku,mart.fact_inventory_snapshot_daily,modeled,Brandon Hardison,requested units from source inventory feed,Supports service / fill analysis
+backordered_units,Inventory,daily by snapshot/store/sku,mart.fact_inventory_snapshot_daily,modeled,Brandon Hardison,requested_units not immediately available,Monitor for stock pressure
+in_stock_flag,Inventory,daily by snapshot/store/sku,mart.fact_inventory_snapshot_daily,modeled,Brandon Hardison,1 when item is in stock else 0,Base signal for in-stock KPIs
+in_stock_rate,Inventory,daily by snapshot/store,mart.kpi_instock_rate_daily,modeled,Brandon Hardison,average or ratio of in-stock items to total tracked items,Report-ready inventory health KPI
+days_of_supply,Inventory,daily by snapshot/store/sku,mart.kpi_days_of_supply,modeled,Brandon Hardison,on_hand_units divided by expected demand or shipment proxy,Directional coverage KPI
+labor_hours,People,daily by work_date/store,mart.fact_labor_daily,modeled,Brandon Hardison,sum of hours worked,Core productivity denominator
+overtime_hours,People,daily by work_date/store,mart.fact_labor_daily,modeled,Brandon Hardison,sum of overtime hours,Helpful staffing pressure indicator
+headcount,People,daily or period measure,mart.fact_labor_daily or semantic model,modeled,Brandon Hardison,count distinct employees or modeled staffing count,Interpret with care by grain
+hires,People,daily or period measure,mart.fact_labor_daily or semantic model,modeled,Brandon Hardison,sum of hires,Useful for workforce change story
+terminations,People,daily or period measure,mart.fact_labor_daily or semantic model,modeled,Brandon Hardison,sum of terminations,Useful for workforce change story
+labor_cost_amount,People,daily by work_date/store,mart.fact_labor_daily,modeled,Brandon Hardison,sum of labor cost amounts,Pair with labor hours and productivity
+sales_per_labor_hour,People / Sales,daily by kpi_date/store,mart.kpi_sales_per_labor_hour_daily,modeled,Brandon Hardison,net sales divided by labor hours,Flagship cross-functional KPI
+finance_gross_sales,Finance,monthly by period and KPI,mart.fact_actuals_monthly,modeled,Brandon Hardison,monthly finance actual gross sales,Used for finance reconciliation
+finance_net_sales,Finance,monthly by period and KPI,mart.fact_actuals_monthly,modeled,Brandon Hardison,monthly finance actual net sales,Used for finance reconciliation
+finance_cogs,Finance,monthly by period and KPI,mart.fact_actuals_monthly,modeled,Brandon Hardison,monthly finance actual COGS,Used for finance reconciliation
+finance_gross_margin,Finance,monthly by period and KPI,mart.fact_actuals_monthly,modeled,Brandon Hardison,monthly finance actual gross margin,Used for finance reconciliation
