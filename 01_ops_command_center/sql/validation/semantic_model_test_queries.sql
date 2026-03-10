@@ -559,6 +559,7 @@ order by fact_name;
 -- Purpose: Validate dimensional coverage for report-safe facts
 -- Grain: 1 row per model + dim + date
 -- =========================================================
+
 select
     run_date,
     model_name,
