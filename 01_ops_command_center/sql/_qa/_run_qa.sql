@@ -14,6 +14,7 @@
 
 \echo '--- QA: INT ---'
 \ir int/qa_int.sql
+\ir int/qa_int_sales_conformed.sql
 \ir int/qa_int_truth_uniqueness.sql
 \echo ''
 
