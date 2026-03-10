@@ -29,6 +29,7 @@
 \ir sales/int_sales_distributor_dedup.sql
 \ir sales/int_pos_dedup.sql
 \ir sales/int_pos_daily.sql
+\ir sales/int_sales_conformed.sql
 -- Optional alternative (leave off unless you intentionally want raw->int bypass):
 -- \ir sales/int_pos_dedup_from_raw.sql
 
@@ -54,7 +55,6 @@
 -- ----------------------------
 -- \ir hr/int_labor_conformed.sql
 -- \ir ops/int_inventory_conformed.sql
--- \ir sales/int_sales_conformed.sql
 
 \echo ''
 \echo '✅ BUILD INT COMPLETE'
