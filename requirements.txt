@@ -1,16 +1,16 @@
+# /requirements.txt
 # Core data stack
 numpy
 pandas
 pyarrow
 
-# Excel support (you already hit this one)
+# Excel support
 openpyxl
 xlsxwriter
 
 # Database connectors / SQL workflows
 duckdb
 sqlalchemy
-psycopg2-binary
 
 # Config + validation
 pyyaml
@@ -31,6 +31,10 @@ matplotlib
 # Utility
 python-dateutil
 
+# Database connectors / SQL workflows
+duckdb
+sqlalchemy
+psycopg[binary]
 
 ###
 
