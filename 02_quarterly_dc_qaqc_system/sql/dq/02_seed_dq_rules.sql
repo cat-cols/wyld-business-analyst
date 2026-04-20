@@ -23,7 +23,7 @@ values
     'Required key present - retail sales',
     'completeness',
     'stg.stg_retail_account_sales_quarterly',
-    'dispensary_account_id, sku_id, week_end_date',
+    'quarter_id, dispensary_account_id, sku_id, week_end_date',
     'critical',
     0.0000,
     'Retail sales records must contain quarter_id, week_end_date, dispensary_account_id, and sku_id.',
@@ -36,7 +36,7 @@ values
     'Required key present - wholesale sales',
     'completeness',
     'stg.stg_wholesale_account_sales_quarterly',
-    'wholesale_account_id, sku_id, week_end_date',
+    'quarter_id, wholesale_account_id, sku_id, week_end_date',
     'critical',
     0.0000,
     'Wholesale sales records must contain quarter_id, week_end_date, wholesale_account_id, and sku_id.',
@@ -86,6 +86,19 @@ values
     true,
     current_date
 ),
+(
+    'No duplicate business grain - wholesale sales',
+    'uniqueness',
+    'stg.stg_wholesale_account_sales_quarterly',
+    'quarter_id, week_end_date, wholesale_account_id, sku_id',
+    'critical',
+    0.0000,
+    'Wholesale sales data must be unique at quarter_id + week_end_date + wholesale_account_id + sku_id.',
+    'Duplicate rows distort sales totals and downstream reconciliation.',
+    'Commercial / Wholesale',
+    true,
+    current_date
+),
 
 -- 3) Validity
 (
@@ -103,7 +116,7 @@ values
 ),
 (
     'Weekly continuity by source - retail sales',
-    'validity',
+    'completeness',
     'stg.stg_retail_account_sales_quarterly',
     'week_end_date',
     'medium',
