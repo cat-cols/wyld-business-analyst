@@ -115,6 +115,19 @@ values
     current_date
 ),
 (
+    'Quarter dates within expected range - trade adjustments',
+    'validity',
+    'stg.stg_trade_adjustments',
+    'adjustment_date',
+    'high',
+    0.0000,
+    'Trade adjustment dates must fall within the expected reporting quarter window.',
+    'Out-of-period trade adjustments compromise quarter certification and reconciliation.',
+    'Trade Marketing / Finance',
+    true,
+    current_date
+),
+(
     'Weekly continuity by source - retail sales',
     'completeness',
     'stg.stg_retail_account_sales_quarterly',
@@ -141,14 +154,14 @@ values
     current_date
 ),
 (
-    'Revenue not negative unless adjustment flag exists',
+    'Negative trade adjustments require valid reason code',
     'validity',
     'stg.stg_trade_adjustments',
-    'adjustment_amount',
+    'adjustment_amount, reason_code',
     'high',
     0.0000,
-    'Negative revenue-like adjustments must be supported by valid adjustment logic and reason codes.',
-    'Unsupported negative revenue values can break revenue certification and reconciliation.',
+    'Trade adjustment rows with negative adjustment_amount must include a valid reason_code.',
+    'Negative trade adjustments without a reason code reduce trust in revenue adjustments and remediation workflows.',
     'Trade Marketing / Finance',
     true,
     current_date
