@@ -5,6 +5,23 @@ This file tracks what has been completed, what still needs cleanup, and what rem
 
 ---
 
+## CURRENT SPRINT / TOP PRIORITY
+
+### Highest-payout next steps
+- [ ] Build Power BI page 1 — Data Quality Monitor
+- [ ] Build Power BI page 2 — Open Exceptions
+- [ ] Build Power BI page 3 — Reconciliation & Certification
+- [ ] Export screenshots from Power BI
+- [ ] Add screenshots to README
+- [ ] Create one-page architecture diagram
+
+### Nice-to-have after current sprint
+- [ ] Final README polish
+- [ ] Add short “How to run Project 2” section
+- [ ] Decide whether to build a short summary deck
+
+---
+
 ## 1. Project foundation
 
 - [x] Define Project 2 scope and business problem
@@ -185,8 +202,3 @@ This file tracks what has been completed, what still needs cleanup, and what rem
 - [ ] Push final commits to GitHub
 
 ---
-
-## Suggested next move
-
-**Next highest-payout step:**  
-Build the Power BI pages, then export screenshots and add them to the README.
