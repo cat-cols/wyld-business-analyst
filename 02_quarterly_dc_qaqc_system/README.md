@@ -1,18 +1,15 @@
-Replace your current Project 2 section with this:
-
-```markdown
 ## Project 2 — Quarterly Data Collection + QA/QC System
 
-**What it is**  
+**What it is**
 A governed quarterly intake, validation, reconciliation, and certification workflow for messy departmental submissions.
 
-**What it proves**  
+**What it proves**
 I can build a repeatable business process for quarterly reporting that does more than ingest files. This project shows I can standardize inconsistent source extracts, apply governed QA/QC rules, surface remediation-ready exceptions, reconcile operational reporting to finance, and publish reporting-ready outputs that support certification decisions.
 
-**Business problem**  
+**Business problem**
 Quarterly reporting often depends on files submitted by different teams using inconsistent templates, incomplete keys, invalid dates, duplicate business-grain rows, unexplained adjustments, and conflicting totals. Those problems slow reporting cycles, create manual cleanup work, and reduce trust in the final numbers.
 
-**Current implementation**  
+**Current implementation**
 This project currently includes:
 
 - raw landing tables for quarterly source submissions
@@ -64,12 +61,4 @@ This project is designed to show the process-control side of analytics work: not
 
 **Proof signal**
 I can build a quarterly reporting QA/QC system that identifies data risk, routes issues to the right business owners, reconciles operational data to finance, and supports a clear hold-or-certify decision before reporting goes out.
-```
 
-A couple of thought-process notes on why this version is stronger:
-
-Your old section was good conceptually, but it was still mostly a proposal. This version reads like a project that actually exists. It uses your real source names, real SQL objects, and real outputs rather than generic placeholders.
-
-It also shifts the framing from “here’s a cool idea” to “here’s the business capability I built,” which is what a hiring manager is really looking for.
-
-The next highest-value README improvement would be adding a short “How to run Project 2” subsection directly under this.
