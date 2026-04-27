@@ -1,6 +1,20 @@
 ## Project 3 — “Forecasting + Variance Story” (Planning, trends, partial info)
 > forecast + actuals + variance bridge
 
+This project simulates a business planning workflow that compares forecasted sales against actual performance, explains variance drivers, and translates model output into executive-ready recommendations.
+
+The goal is not just to forecast future sales. The goal is to explain what changed, why it changed, and what the business should do next.
+
+## What this project demonstrates
+
+- Weekly sales forecasting
+- Actuals vs forecast comparison
+- Forecast accuracy measurement
+- Price / volume / mix variance decomposition
+- Driver diagnostics for stores, SKUs, channels, promotions, and stockouts
+- Power BI-ready mart design
+- Executive storytelling for finance and commercial teams
+
 **What it proves:** trend/pattern detection, forecasting, plugging data gaps intelligently, explaining drivers.
 
 **Concept:** Build a forecasting + variance analysis report:
