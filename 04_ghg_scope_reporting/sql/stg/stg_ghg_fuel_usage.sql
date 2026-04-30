@@ -6,7 +6,7 @@ with source as (
     from raw.ghg_fuel_usage_facility
 ),
 
-cleaned as (
+normalized as (
     select
         raw_row_id,
 
@@ -53,23 +53,37 @@ cleaned as (
             when trim(cost_usd) ~ '^-?\d+(\.\d+)?$'
                 then trim(cost_usd)::numeric(18, 2)
             else null
-        end as cost_usd,
+        end as cost_usd
 
+    from source
+),
+
+classified as (
+    select
+        *,
         'Scope 1' as scope,
 
         case
-            when lower(trim(fuel_type)) in ('natural gas', 'natural_gas')
+            when fuel_type = 'natural_gas' and activity_unit = 'therm'
                 then 'natural_gas_therm'
-            when lower(trim(fuel_type)) = 'diesel'
+            when fuel_type = 'diesel' and activity_unit = 'gallon'
                 then 'diesel_gallon'
-            when lower(trim(fuel_type)) = 'gasoline'
+            when fuel_type = 'gasoline' and activity_unit = 'gallon'
                 then 'gasoline_gallon'
             else null
         end as factor_type,
 
+        case
+            when fuel_type = 'natural_gas' and activity_unit <> 'therm'
+                then true
+            when fuel_type in ('diesel', 'gasoline') and activity_unit <> 'gallon'
+                then true
+            else false
+        end as has_invalid_fuel_unit,
+
         'fuel_usage' as source_system
 
-    from source
+    from normalized
 )
 
 select
@@ -78,4 +92,4 @@ select
     facility_id is null as has_missing_facility_id,
     activity_month is null as has_invalid_activity_month,
     factor_type is null as has_unknown_fuel_type
-from cleaned;
+from classified;
