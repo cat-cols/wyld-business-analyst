@@ -17,4 +17,8 @@
 \ir decision_kpi_driver_tree.sql
 
 \echo ''
+\echo 'Building mart.decision_revenue_variance_root_cause...'
+\ir decision_revenue_variance_root_cause.sql
+
+\echo ''
 \echo 'Project 5: decision tree mart build complete.'
