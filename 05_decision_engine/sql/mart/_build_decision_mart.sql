@@ -21,4 +21,8 @@
 \ir decision_revenue_variance_root_cause.sql
 
 \echo ''
+\echo 'Building mart.alerts_low_margin...'
+\ir alerts_low_margin.sql
+
+\echo ''
 \echo 'Project 5: decision tree mart build complete.'
