@@ -1,9 +1,6 @@
----
-
 # Business Logic:
 * gross sales should generally be >= net sales
 * gross margin should generally be close to `net_sales - cogs` depending on sign conventions
-
 
 ---
 
@@ -61,7 +58,7 @@ Example structure:
 
 Think of it as the **taxonomy of money**.
 
-When analysts reconcile numbers, they often need to know which accounts map to which KPI.
+> # When analysts reconcile numbers, they often need to know which accounts map to which KPI.
 
 ---
 
@@ -209,7 +206,7 @@ Variance analysis usually includes:
 | Percent difference | Scale of error       |
 | Tolerance          | Acceptable deviation |
 
-Your SQL recon view in your project is **exactly this pattern**.
+> The SQL recon view in your project is **exactly this pattern**.
 
 ---
 
