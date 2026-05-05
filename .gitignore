@@ -33,6 +33,8 @@ notes/**
 02_quarterly_dc_qaqc_system/_notes/**
 03_forecasting_variance_story/_notes/**
 04_ghg_scope_reporting/_notes/**
+05_decision_engine/_notes/**
+06_fpna_planning/_notes/**
 
 docs/licenses_by_type.pdf
 
@@ -51,5 +53,3 @@ archive/**
 # misc
 logs/**
 README2.md
-05_decision_engine/_notes/**
-06_fpna_planning/
