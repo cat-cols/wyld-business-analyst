@@ -9,6 +9,7 @@ psql "$P1_PG_OPS" -c "\copy (select * from mart.controls_unknown_activity_type) 
 psql "$P1_PG_OPS" -c "\copy (select * from mart.controls_negative_activity) to '04_ghg_scope_reporting/bi_exports/controls_negative_activity.csv' csv header"
 psql "$P1_PG_OPS" -c "\copy (select * from mart.controls_missing_factor_joins) to '04_ghg_scope_reporting/bi_exports/controls_missing_factor_joins.csv' csv header"
 psql "$P1_PG_OPS" -c "\copy (select * from mart.controls_missing_dim_joins) to '04_ghg_scope_reporting/bi_exports/controls_missing_dim_joins.csv' csv header"
+psql "$P1_PG_OPS" -c "\copy (select * from mart.controls_duplicate_source_records) to '04_ghg_scope_reporting/bi_exports/controls_duplicate_source_records.csv' csv header"
 
 echo ""
 echo "BI exports written to 04_ghg_scope_reporting/bi_exports"
