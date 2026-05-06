@@ -1,0 +1,6 @@
+source_system,scope,activity_month,facility_id,product_line_id,activity_category,factor_type,activity_amount,activity_unit,evidence_reference,has_unknown_activity_type,has_missing_factor_join,qa_status_label
+fuel_usage,Scope 1,2025-01-01,FAC002,,natural_gas,,775.1900,gallon,FUEL-NG-202501-FAC002,t,t,❌ Missing factor join
+fuel_usage,Scope 1,2025-01-01,FAC004,,natural_gas,,2234.7100,gallon,FUEL-NG-202501-FAC004,t,t,❌ Missing factor join
+fuel_usage,Scope 1,2025-06-01,FAC003,,natural_gas,,605.2800,gallon,FUEL-NG-202506-FAC003,t,t,❌ Missing factor join
+fuel_usage,Scope 1,2026-01-01,FAC003,,natural_gas,,656.6400,gallon,FUEL-NG-202601-FAC003,t,t,❌ Missing factor join
+fuel_usage,Scope 1,2026-03-01,FAC001,,natural_gas,,2328.7100,gallon,FUEL-NG-202603-FAC001,t,t,❌ Missing factor join

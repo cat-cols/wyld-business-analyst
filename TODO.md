@@ -6,8 +6,7 @@
 
 - [ ] Add semantic model test queries to validation folder
 - [ ] refactor customers as entity types: wholesale, retail/direct?
-- 
-
+- [ ] Add: portfolio system map diagram explanation of how all 6 projects connect to each other and how they fit into the overall data architecture (assets/diagrams/portfolio_system_map.png)
 ---
 
 ## MEDIUM PRIORITY
