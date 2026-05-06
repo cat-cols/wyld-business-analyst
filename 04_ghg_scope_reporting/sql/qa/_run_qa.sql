@@ -18,6 +18,9 @@
 \echo 'QA 5: QA summary'
 \ir 05_qa_summary.sql
 
+\echo 'QA 6: duplicate source records'
+\ir qa_duplicate_source_records.sql
+
 \echo '============================================================'
 \echo 'PROJECT 4 QA COMPLETE'
 \echo '============================================================'
