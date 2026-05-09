@@ -34,6 +34,9 @@ This repository is built to show more than dashboarding. It is meant to demonstr
 ### In progress / planned next
 - **03_forecasting_variance_story** — forecasting + variance analysis
 - **04_ghg_scope_reporting** — sustainability reporting + audit-ready documentation
+- **05_decision_engine** — decision engine and recommendation system
+- **06_fpna_planning** — FPNA planning and forecasting
+- **07_sales_data_coordinator** — sales data coordination and standardization
 
 ### Shared across projects
 - **shared/** — reusable SQL, semantic-model, governance, and documentation templates
@@ -49,23 +52,28 @@ This repository is built to show more than dashboarding. It is meant to demonstr
 │   ├── sql/
 │   ├── powerbi/
 │   ├── docs/
-│   └── reports/
+│   ├── reports/
+│   ├── scripts/
+│   └── requirements.txt
+|
 ├── 02_quarterly_dc_qaqc_system/         # Quarterly QA/QC + reconciliation project
 ├── 03_forecasting_variance_story/       # Forecasting + variance analysis
 ├── 04_ghg_scope_reporting/              # GHG / ESG reporting + assurance-ready docs
+├── 05_decision_engine/                  # Decision engine and recommendation system
+├── 06_fpna_planning/                    # FPNA planning and forecasting
+├── 07_sales_data_coordinator/           # Sales data coordination and standardization
+|
 ├── shared/                              # Reusable patterns/templates across projects
 │   ├── sql/
 │   ├── semantic_model/
 │   ├── source_systems/
 │   ├── templates/
 │   └── reporting_ops/
+|
 ├── docs/                                # Cross-project architecture, dictionaries, notes
 ├── scripts/                             # Data generation + utility scripts
 ├── assets/diagrams/                     # Architecture / schema diagrams
 ├── setup_repo.sh                        # Bootstrap script
-├── requirements.txt
-├── requirements-dq.txt
-├── requirements-forecasting.txt
 └── README.md
 ```
 
